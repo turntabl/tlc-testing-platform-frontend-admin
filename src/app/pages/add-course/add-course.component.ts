@@ -14,6 +14,9 @@ import { CourseService } from 'src/app/services/course.service';
 export class AddCourseComponent implements OnInit {
   courses: CourseUpdate[]=[];
   empty: number;
+  message:string;
+  isSuccess:boolean;
+  isError:boolean;
 
   constructor(private auth:AuthenticateService, public modalService: NgbModal, private courseService: CourseService) {}
 
@@ -23,8 +26,16 @@ export class AddCourseComponent implements OnInit {
   }
 
   openUpdateCourseModal(id: number, name:string) {
-    this.modalService.open(UpdateCourseModalComponent);
-    this.courseService.getUpdate({courseId: id, courseName: name});
+    const modalRef =  this.modalService.open(UpdateCourseModalComponent);
+    modalRef.componentInstance.data = {courseId: id, courseName: name};
+    modalRef.componentInstance.onCourseUpdate.subscribe((data: { courseId: number; courseName:string;})=> {
+      for (let index = 0; index < this.courses.length; index++) {
+        const element = this.courses[index];
+        if(element.courseId === data.courseId){
+          element.courseName = data.courseName;
+        }
+      }
+    });
   }
 
   getAllCourse(){
@@ -36,7 +47,21 @@ export class AddCourseComponent implements OnInit {
 
   deleteCourse(courseId: number){
     this.courseService.deleteCourse(courseId).subscribe(result =>{
-      console.log(result);
+      if(result){
+        for (let index = 0; index < this.courses.length; index++) {
+          const element = this.courses[index];
+          if(element.courseId == courseId){
+            this.courses.splice(index,1);
+          }
+        }
+        this.message = "Successfully deleted course";
+        this.isSuccess = true;
+        setTimeout(() => ( this.isSuccess = true ), 5000);
+      }else{
+        this.message = "Error deleting Course";
+        this.isError = true;
+        setTimeout(() => ( this.isError = true ), 5000);
+      }
     });
   }
 }

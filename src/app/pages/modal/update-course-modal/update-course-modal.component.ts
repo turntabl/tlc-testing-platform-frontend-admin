@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CourseService } from 'src/app/services/course.service';
@@ -9,33 +10,43 @@ import { CourseService } from 'src/app/services/course.service';
   styleUrls: ['./update-course-modal.component.css']
 })
 export class UpdateCourseModalComponent implements OnInit {
-  courseId: number;
-  courseName: string;
+  @Input() data:any; 
+  @Output() onCourseUpdate = new EventEmitter<any>();
   Update: string="Update";
   notEmpty: boolean=false;
   success: boolean=false;
   error: boolean=false;
+  courseUpdateForm:FormGroup;
 
   constructor(public activeModal: NgbActiveModal, 
     private courseService: CourseService,
-    private router: Router 
+    private router: Router,
+    private form: FormBuilder
     ) {}
 
   ngOnInit(): void {
-    this.courseId = this.courseService.getCourseId();
-    this.courseName = this.courseService.getCourseName();
+    this.buildForm();
+  }
+
+  buildForm() {
+    this.courseUpdateForm = this.form.group({
+      courseName: ['', [Validators.required]],
+      courseId:['']
+    });
   }
 
   updateCourse(){
-    if (this.courseName=="") {
+    if (this.courseUpdateForm.get('courseName')?.value =="") {
       this.notEmpty=true;
     }else{
     this.Update="Updating...";
-    this.courseService.updateCourse({ courseId: this.courseId, courseName: this.courseName }).subscribe(result =>{
+    this.courseUpdateForm.get('courseId')?.setValue(this.data.courseId);
+    this.courseService.updateCourse(this.courseUpdateForm.value).subscribe(result =>{
       if(result!=null){
         this.Update="Update";
+        this.onCourseUpdate.emit(this.courseUpdateForm.value);
         this.success =true;
-        setTimeout(() => (this.activeModal.dismiss('Cross click')), 1500);
+        setTimeout(() => (this.activeModal.dismiss()), 1500);
       }
     },error=>{ this.error = true; this.Update="Update"; }
     );}

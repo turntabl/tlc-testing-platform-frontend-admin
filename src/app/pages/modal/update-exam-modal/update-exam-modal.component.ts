@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ExamsService } from 'src/app/services/exams.service';
@@ -9,6 +10,8 @@ import { ExamsService } from 'src/app/services/exams.service';
   styleUrls: ['./update-exam-modal.component.css']
 })
 export class UpdateExamModalComponent implements OnInit {
+  @Input() data: any;
+  @Output() onExamUpdate = new EventEmitter<any>();
   timeStart: {hour:0, minute:0, second:0};
   timeEnd : {hour:0, minute:0, second:0};
   date: { year:0, month:0, day:0 };
@@ -27,46 +30,57 @@ export class UpdateExamModalComponent implements OnInit {
   error: boolean = false;
   update: string = "Update";
   response:any;
+  examUpdateForm:FormGroup;
 
-  constructor(public activeModal: NgbActiveModal, private examsService: ExamsService) {}
+  constructor(public activeModal: NgbActiveModal, private examsService: ExamsService, private form: FormBuilder) {}
 
   ngOnInit(): void {
-    this.testId = this.examsService.getTestId();
-    this.questionType= this.examsService.getQuestionType();
-    console.log(this.questionType);
-    
-    this.examsTitle = this.examsService.getTitle();
-    this.examsRule = this.examsService.getRule();
-    this.date = JSON.parse(this.examsService.getDate());
-    this.timeStart = JSON.parse(this.examsService.getTimeStart());
-    this.timeEnd = JSON.parse(this.examsService.getTimeEnd());
+    this.buildForm();
+  }
 
-    this.courseName = this.examsService.getCourseName();
+  buildForm() {
+    this.examUpdateForm = this.form.group({
+      questions_type: [this.data.questions_type],
+      test_date:[this.test_date, [Validators.required]],
+      test_id:[this.data.test_id],
+      test_title:[this.data.test_title, [Validators.required]],
+      test_rule:[this.data.test_rule, [Validators.required]],
+      test_time_start:[this.test_start, [Validators.required]],
+      test_time_end:[this.test_end, [Validators.required]]
+    });
   }
 
   updateExam(){
-    if (this.examsTitle!="" && this.examsRule!="" && this.examsDate!="" && this.examsTimeStart!="" && this.examsTimeEnd!="") {
     this.update="Updating...";
-      this.examsTimeStart=JSON.stringify(this.timeStart);
-    this.examsTimeEnd=JSON.stringify(this.timeEnd);
-    this.examsDate=JSON.stringify(this.date);
-    this.examsService.updateExam({
-      questions_type: this.questionType,
-      test_date: this.examsDate,
-      test_id: this.testId,
-      test_title: this.examsTitle,
-      test_rule: this.examsRule,
-      test_time_start: this.examsTimeStart, 
-      test_time_end: this.examsTimeEnd
-    }).subscribe(result => {
+    this.examUpdateForm.get('test_time_start')?.setValue(JSON.stringify(this.examUpdateForm.get('test_time_start')?.value));
+    this.examUpdateForm.get('test_time_end')?.setValue(JSON.stringify(this.examUpdateForm.get('test_time_end')?.value));
+    this.examUpdateForm.get('test_date')?.setValue(JSON.stringify(this.examUpdateForm.get('test_date')?.value));
+    this.examsService.updateExam(this.examUpdateForm.value).subscribe(result => {
       this.response = result;
-      this.update="Update";
-      setTimeout(() => (this.activeModal.dismiss('Cross click')), 1500);
-    }, error=>{this.error=true; this.update="Update";});
-    }else{
-      this.notEmpty = true;
-  }
+      if(result.message === "success"){
+        this.onExamUpdate.emit({test_title: this.examUpdateForm.get('test_title')?.value, test_id:this.examUpdateForm.get('test_id')?.value});
+        this.update="Update";
+        setTimeout(() => (this.activeModal.dismiss('Cross click')), 1500);
+      }else{
+        this.error=true;
+        this.update="Update";
+      }
+    });
 }
+
+get test_date(){
+  return JSON.parse(this.data.test_date);
+}
+
+get test_start(){
+  return JSON.parse(this.data.test_time_start);
+}
+
+get test_end(){
+  return JSON.parse(this.data.test_time_end);
+}
+
+// this.onCourseUpdate.emit(this.courseUpdateForm.value);
 
 onClick(){
   this.notEmpty =false;

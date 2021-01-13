@@ -75,7 +75,7 @@ export class ExamsService extends BackendService {
     return this.user_id;
   }
 
-  updateExam(examUpdate: ExamsUpdate) {
+  updateExam(examUpdate: ExamsUpdate):Observable<any> {
     return this.http.post(`${this.baseURL}/api/test/update`,examUpdate);
   }
 }

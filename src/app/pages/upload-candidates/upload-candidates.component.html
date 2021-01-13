@@ -13,14 +13,14 @@
         <div class="total-number-text">Total Number of Students :&nbsp;<b>{{ total_candidates }}</b></div>
       </div>
       <div class="total-users">
-        <div class="total-number-text">Total Number of Admins :&nbsp;<b>{{ users }}</b></div>
+        <div class="total-number-text">Total Number of Admins :&nbsp;<b>{{ total_users }}</b></div>
       </div>
     </div>
     <span class="up" (click)="changeUpload()">{{ uploadChanger }}</span>
-    <div class="emptyCann" *ngIf="empty==0">
+    <div class="emptyCann" *ngIf="total_users==0">
       <img src="../../../assets/empty.png" alt="" width="300px">
     </div>
-    <div *ngIf="empty!=0">
+    <div *ngIf="total_users!=0">
     <div class="content-right" *ngIf="uploadUsers">
       <div
         class="custom-dropzone"

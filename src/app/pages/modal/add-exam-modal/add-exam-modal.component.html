@@ -27,6 +27,7 @@
     <div class="form-group">
       <label for="exampleFormControlSelect1">Select Course</label>
       <select [formControl]="dropdown" class="form-control" id="exampleFormControlSelect1" (input)="clear()">
+        <option [value]="0"  >Select Course</option>
         <option [value]="i.courseId" *ngFor="let i of course" >{{ i.courseName }}</option>
       </select>
     </div>

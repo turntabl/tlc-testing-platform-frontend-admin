@@ -51,16 +51,17 @@ export class AddExamModalComponent implements OnInit {
   }
 
   addExam(){
-    if (this.courseId!=null && this.examsTitle!=null && this.examsType!=null && this.examsRule!=null && this.date!=null && this.timeStart!=null && this.timeEnd!=null ) {
+    if (this.courseId!=null && this.examsTitle!=null && this.examsType!=null && this.examsRule!=null && this.date!=null && this.timeStart!=null && this.timeEnd!=null && this.courseId!=0) {
     this.add = "Adding...";
     this.examsTimeStart=JSON.stringify({hour: this.timeStart.hour, minute: this.timeStart.minute});
     this.examsTimeEnd=JSON.stringify({hour: this.timeEnd.hour, minute: this.timeEnd.minute});
     this.examsDate=JSON.stringify(this.date);
     this.examsService.addExams({ 
+        test_id:0,
         course_id: this.courseId, 
         test_title: this.examsTitle,
         questions_type: this.examsType, 
-        test_rule: this.examsRule, 
+        test_rules: this.examsRule, 
         test_date: this.examsDate, 
         test_time_start: this.examsTimeStart, 
         test_time_end: this.examsTimeEnd,

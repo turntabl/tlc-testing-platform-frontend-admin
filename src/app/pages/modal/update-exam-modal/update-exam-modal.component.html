@@ -18,28 +18,28 @@
     <div class="alert alert-success" role="alert" *ngIf="response!=null">
       Update Successful!
      </div>
-    <form>
+    <form [formGroup]="examUpdateForm" > 
       <div class="form-group">
         <label for="exampleFormControlSelect1">Course</label>
-        <input id="addCourse" class="form-control" value="{{ courseName }}" disabled/>
+        <input id="addCourse" class="form-control"  value="{{ data.course_name }}" disabled/>
       </div>
       <div class="form-group">
         <label for="dateOfBirth">Test Title</label>
         <div class="input-group">
-          <input id="addCourse" class="form-control" placeholder="Enter Test Title" name="examsTitle" [(ngModel)]="examsTitle" (input)="onClick()"/>
+          <input id="addCourse" class="form-control" formControlName="test_title" name="examsTitle" (input)="onClick()"/>
         </div>
       </div>
   
       <div class="form-group">
         <label for="exampleFormControlTextarea1">Test Rule</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="examsRule" [(ngModel)]="examsRule" (input)="onClick()"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="test_rule"  rows="3" name="examsRule" (input)="onClick()"></textarea>
       </div>
       <!-- Date -->
       <div class="form-group">
         <label class="mr-2 text-info">Date</label>
         <br/>
         <div class="input-group">
-          <input class="form-control form-control-lg" placeholder="yyyy-mm-dd" name="date" [(ngModel)]="date" ngbDatepicker #d="ngbDatepicker" (input)="onClick()"/>
+          <input class="form-control form-control-lg" placeholder="yyyy-mm-dd" name="date"  ngbDatepicker #d="ngbDatepicker" formControlName="test_date" (input)="onClick()"/>
           <div class="input-group-append">
             <button class="btn btn-lg btn-outline-secondary calendar" (click)="d.toggle()" type="button">
               <fa-icon [icon]="faCalendar"></fa-icon>
@@ -52,12 +52,12 @@
       <div class="row mt-4">
         <div class="col-md-6 time">
           <label class="mr-2 text-info">Start Time</label>
-          <ngb-timepicker name="timeStart" [(ngModel)]="timeStart" (input)="onClick()"></ngb-timepicker>
+          <ngb-timepicker name="timeStart" (input)="onClick()" formControlName="test_time_start"   ></ngb-timepicker>
         </div>
     
         <div class="col-md-6 time">
           <label class="mr-2 text-info">End Time</label>
-          <ngb-timepicker name="timeEnd" [(ngModel)]="timeEnd" (input)="onClick()"></ngb-timepicker>
+          <ngb-timepicker name="timeEnd" (input)="onClick()"  formControlName="test_time_end" ></ngb-timepicker>
         </div>
       </div>
       <!-- Time Start and Time End -->

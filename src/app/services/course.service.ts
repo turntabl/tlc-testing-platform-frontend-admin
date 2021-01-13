@@ -29,20 +29,7 @@ export class CourseService extends BackendService {
     return this.http.post(`${this.baseURL}/api/course/update`,courseUpdate);
   }
 
-  deleteCourse(courseDelete: number){
-    return this.http.delete(`${this.baseURL}/api/course/delete/`+courseDelete);
-  }
-
-  getUpdate(courseUpdate: CourseUpdate){
-    this.courseId = courseUpdate.courseId;
-    this.courseName = courseUpdate.courseName;
-  }
-
-  getCourseId(){
-    return this.courseId;
-  }
-
-  getCourseName(){
-    return this.courseName;
+  deleteCourse(courseDelete: number):Observable<any>{
+    return this.http.get(`${this.baseURL}/api/course/delete/${courseDelete}`);
   }
 }

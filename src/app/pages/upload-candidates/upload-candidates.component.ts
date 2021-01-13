@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  Input,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -20,12 +21,14 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./upload-candidates.component.css'],
 })
 export class UploadCandidatesComponent implements OnInit, AfterViewInit {
+  @Input() userAdded: any;
   users:any;
   allUsers:any;
   public dataSource = new MatTableDataSource<Student>();
   columnsToDisplay = ['first_name', 'last_name', 'email', 'role'];
   students:any;
   total_candidates: number = 0;
+  total_users:number = 0;
   files: any[] = [];
   errorIsShown: boolean = false;
   successIsShown: boolean = false;
@@ -33,7 +36,6 @@ export class UploadCandidatesComponent implements OnInit, AfterViewInit {
   errorMessage: string = '';
   uploadUsers: boolean=false;
   uploadChanger: string="Upload Users";
-  empty: number;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @ViewChild('fileUpload', { static: false }) fileUpload!: ElementRef;
@@ -108,8 +110,8 @@ export class UploadCandidatesComponent implements OnInit, AfterViewInit {
 
   getAllUsers(){
     this.userService.getAllUsers().subscribe((users)=>{
-        this.users = users.length;
-        this.empty = this.users
+        this.users = users;
+        this.total_users += users.length;
     });
   }
 
