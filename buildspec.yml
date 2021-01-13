@@ -13,7 +13,6 @@ phases:
   pre_build:
     commands:
       - echo installing dependencies...
-      - cd admin
       - npm i -g @angular/cli
       - npm install
   build:
@@ -25,4 +24,4 @@ artifacts:
   files:
     - "**/*"
   discard-paths: no
-  base-directory: admin/dist/admin
+  base-directory: dist/admin
