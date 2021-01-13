@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AuthenticateService } from "./services/authenticate.service";
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AddAdminFormComponent } from './pages/modal/add-admin-form/add-admin-form.component';
@@ -6,6 +6,8 @@ import { DeleteAdminComponent } from './pages/modal/delete-admin/delete-admin.co
 import { faBook, faCoffee, faCommentDots, faFileAlt, faMarker, faQuestion, faQuestionCircle, faTachometerAlt, faUserGraduate } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { AuthService } from './services/auth/auth.service';
+import { CandidateUploadService } from './services/candidate-upload.service';
+import { UserService } from './services/user.service';
 
 
 @Component({
@@ -36,11 +38,12 @@ export class AppComponent {
   isSuperAdmin$:Observable<boolean>;
   roll: number;
 
-  constructor(public auth: AuthenticateService, public modalService: NgbModal, private authService:AuthService){}
+  constructor(public auth: AuthenticateService, public modalService: NgbModal, private authService:AuthService, private candidateUploadService:CandidateUploadService, private userService:UserService){}
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.authService.isLoggedIn;
     this.isSuperAdmin$ = this.authService.isSuperAdmin;
+    this.countCandidates();
   }
   
   signout(): void {
@@ -61,10 +64,30 @@ export class AppComponent {
   }
 
   openAdminFormModal() {
-    this.modalService.open(AddAdminFormComponent);
+    const modalRef = this.modalService.open(AddAdminFormComponent);
+    modalRef.componentInstance.onAddUser.subscribe((data: boolean)=> {
+        if(data){
+          ++this.userService.total_users;
+        }
+    });
   }
 
   openDeleteAdminFormModal() {
-    this.modalService.open(DeleteAdminComponent);
+    const modalRef = this.modalService.open(DeleteAdminComponent);
+    modalRef.componentInstance.onRemoveUser.subscribe((data: boolean)=> {
+      if(data){
+        --this.userService.total_users;
+      }
+  });
+  }
+
+  countCandidates(){
+    this.candidateUploadService.getAllStudents().subscribe(result=> {
+      if (result!=null) {
+        this.userService.getAllUsers().subscribe((users)=>{
+          this.userService.total_users = result.length + users.length;
+      });
+      }
+    })
   }
 }

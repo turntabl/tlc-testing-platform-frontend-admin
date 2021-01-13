@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/services/user.service';
@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./add-admin-form.component.css']
 })
 export class AddAdminFormComponent implements OnInit {
+  @Output() onAddUser = new EventEmitter<any>();
   userRole:string;
   public userForm: FormGroup;
   isEmpty:boolean=false;
@@ -38,7 +39,13 @@ onSubmit() {
     setTimeout(() => (this.isEmpty = false), 10000);
   }else{
     this.userService.addUser(this.userForm.value).subscribe((res)=>{
-      this.message = `Successfully Added User`;
+      if(res.message !== "success"){
+        this.onAddUser.emit(false);
+        this.message = res.message;
+      }else{
+        this.onAddUser.emit(true);
+        this.message = `Successfully Added User`;
+      }
       this.isSuccess = true;
       this.userForm.reset();
       setTimeout(() => (this.isEmpty = false), 5000);

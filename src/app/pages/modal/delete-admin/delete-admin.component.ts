@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/services/user.service';
 @Component({
@@ -7,6 +7,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./delete-admin.component.css']
 })
 export class DeleteAdminComponent implements OnInit {
+  @Output() onRemoveUser = new EventEmitter<any>();
   users:any;
   message:string;
   isSuccess:boolean=false;
@@ -30,6 +31,7 @@ export class DeleteAdminComponent implements OnInit {
   removeUser(user_id:string){
     this.userService.removeUser(user_id).subscribe((res)=>{
         if(res.message === "success"){
+          this.onRemoveUser.emit(true);
           for (let index = 0; index < this.users.length; index++) {
             const element = this.users[index];
             if(element.user_id == user_id){
@@ -41,6 +43,7 @@ export class DeleteAdminComponent implements OnInit {
           setTimeout(() => ( this.isSuccess = true ), 5000);
           setTimeout(() => ( this.activeModal.dismiss('Cross click')), 5000);
         }else{
+          this.onRemoveUser.emit(false);
           this.message = "Error deleting user";
           this.isError = true;
           setTimeout(() => ( this.isError = true ), 5000);

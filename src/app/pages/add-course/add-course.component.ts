@@ -47,7 +47,7 @@ export class AddCourseComponent implements OnInit {
 
   deleteCourse(courseId: number){
     this.courseService.deleteCourse(courseId).subscribe(result =>{
-      if(result){
+      if(result.message === "success"){
         for (let index = 0; index < this.courses.length; index++) {
           const element = this.courses[index];
           if(element.courseId == courseId){
@@ -56,12 +56,20 @@ export class AddCourseComponent implements OnInit {
         }
         this.message = "Successfully deleted course";
         this.isSuccess = true;
-        setTimeout(() => ( this.isSuccess = true ), 5000);
+        setTimeout(() => ( this.isSuccess = false ), 5000);
       }else{
         this.message = "Error deleting Course";
         this.isError = true;
-        setTimeout(() => ( this.isError = true ), 5000);
+        setTimeout(() => ( this.isError = false ), 5000);
       }
-    });
+    },
+
+    error => {
+      this.message = "Error : There is/are test(s) and questions associated with this course.";
+      this.isError = true;
+      setTimeout(() => ( this.isError = false ), 5000);
+    }
+    
+    );
   }
 }

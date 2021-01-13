@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ExamsService } from 'src/app/services/exams.service';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-exam-modal.component.css'],
 })
 export class AddExamModalComponent implements OnInit {
+  @Output() onExamAdd = new EventEmitter<any>();
   timeStart: {hour: number, minute: number, second: number};
   timeEnd : {hour: number, minute: number, second: number};
   date: { year: number, month: number, day: number};
@@ -68,10 +69,12 @@ export class AddExamModalComponent implements OnInit {
         user_id: this.user_id })
       .subscribe(result => {
         if (JSON.parse(JSON.stringify(result)).message=="success") {
+          this.onExamAdd.emit(true);
           this.add = "Add";
           this.success=true;
           setTimeout(() => ( this.activeModal.dismiss('Cross click')), 1500);
         }else if (JSON.parse(JSON.stringify(result)).message=="duplicate test title") {
+          this.onExamAdd.emit(false);
           this.add = "Add";
           this.exist=true;
         }

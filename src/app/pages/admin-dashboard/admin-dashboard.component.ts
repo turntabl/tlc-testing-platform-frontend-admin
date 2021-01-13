@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddCourseModalComponent } from '../modal/add-course-modal/add-course-modal.component';
 import { AddExamModalComponent } from '../modal/add-exam-modal/add-exam-modal.component';
@@ -22,7 +22,6 @@ export class AdminDashboardComponent implements OnInit {
   role:any;
   name:any;
   numberOfCourses: number = 0;
-  numberOfUsers: number = 0;
   numberOfExams: number = 0;
 
   constructor(public modalService: NgbModal, 
@@ -44,7 +43,6 @@ export class AdminDashboardComponent implements OnInit {
         this.role = "ADMIN";
       }
       this.countCourses();
-      this.countCandidates();
       this.countExams();
     }else{
       this.router.navigate(['/login']);
@@ -52,11 +50,21 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   openCourseModal() {
-    this.modalService.open(AddCourseModalComponent);
+    const modalRef = this.modalService.open(AddCourseModalComponent);
+    modalRef.componentInstance.onCourseAdd.subscribe((data: boolean)=> {
+        if(data){
+          this.numberOfCourses++;
+        }
+    });
   }
 
   openExamModal() {
-    this.modalService.open(AddExamModalComponent);
+    const modalRef = this.modalService.open(AddExamModalComponent);
+    modalRef.componentInstance.onExamAdd.subscribe((data: boolean)=> {
+      if(data){
+        this.numberOfExams++;
+      }
+  });
   }
 
   openInstructionModal() {
@@ -75,20 +83,17 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  countCandidates(){
-    this.candidateUploadService.getAllStudents().subscribe(result=> {
-      if (result!=null) {
-        this.userService.getAllUsers().subscribe((users)=>{
-          this.numberOfUsers = result.length + users.length;
-      });
-      }
-    })
-  }
+
   countExams(){
     this.examsService.getAllExams().subscribe(result=>{
       if(result!=null){
         this.numberOfExams = result.length;
       }
     })
+  }
+
+
+  get numberOfUsers(){
+     return this.userService.total_users;
   }
 }

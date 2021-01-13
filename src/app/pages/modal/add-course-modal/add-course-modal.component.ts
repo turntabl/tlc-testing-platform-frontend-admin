@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Course } from 'src/app/model/Course';
@@ -11,6 +11,7 @@ import { CourseService } from '../../../services/course.service';
   styleUrls: ['./add-course-modal.component.css'],
 })
 export class AddCourseModalComponent implements OnInit {
+  @Output() onCourseAdd = new EventEmitter<any>();
   addcourse: string;
   user_id: string;
   notEmpty: boolean=false;
@@ -35,10 +36,12 @@ export class AddCourseModalComponent implements OnInit {
       this.add = "Adding...";
       this.courseService.addCourse({courseName: this.addcourse, user_id: this.user_id}).subscribe(response=>{
         if(JSON.parse(JSON.stringify(response)).message=="success"){
+          this.onCourseAdd.emit(true);
           this.add = "Add";
           this.success=true;
           setTimeout(() => (this.activeModal.dismiss('Cross click')), 1500);
         }else if(JSON.parse(JSON.stringify(response)).message=="duplicate course name"){
+          this.onCourseAdd.emit(false);
           this.add = "Add";
           this.exist=true;
         }

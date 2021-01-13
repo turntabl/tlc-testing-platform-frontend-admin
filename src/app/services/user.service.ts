@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../model/User';
 import { BackendService } from './BackendService';
+import { CandidateUploadService } from './candidate-upload.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService extends BackendService  {
+  total_users:number;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private candidateUploadService:CandidateUploadService ) { 
     super();
   }
   
@@ -29,4 +31,5 @@ export class UserService extends BackendService  {
   removeUser(user_id:string):Observable<any>{
     return this.http.get<any>(`${this.baseURL}/api/delete-user/${user_id}`);
   }
+
 }
