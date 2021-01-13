@@ -1,0 +1,81 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body{
+    background-color: #f4f4f4;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+header {
+    background-color: rgb(255, 255, 255);
+    padding: 1.5em 0;
+    border-bottom-color:  #f0f0f0;
+    border-bottom-style: solid;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+a.logo {
+    font-weight: bold;
+    color: rgb(238, 129, 12);
+}
+
+nav {
+    float: right;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    display: flex;
+}
+
+nav ul a {
+    
+    color:black;
+}
+
+.profile-top{
+    border-radius: 99%;
+    width: 25px;
+    height: 25px;
+    background-color:    rgb(233, 233, 233);
+}
+.emptyCan{
+    max-width:100%;
+    padding-top: 10em;
+    padding-left: 12em;
+    text-align: center;
+  }
+  .up{
+    float: right;
+    background-color: rgb(196, 0, 75);
+    color: rgb(235, 235, 235);
+    padding-top:0.5em;
+    padding-bottom:0.5em;
+    padding-left:1em;
+    padding-right:1em;
+    margin-bottom: 0.5em;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .up:hover{
+    background-color: rgb(228, 0, 87);
+  }
+/* nav ul a:hover {
+    background-color: rgb(20, 20, 89);
+} */
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

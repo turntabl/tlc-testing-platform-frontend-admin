@@ -1,0 +1,76 @@
+<div class="modal-header">
+  <h5 class="modal-title text-center" id="modal-basic-title">Add Test</h5>
+  <h5
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </h5>
+</div>
+<div class="modal-body">
+  <div class="alert alert-danger" role="alert" *ngIf="notEmpty">
+    All fields are required!
+   </div>
+   <div class="alert alert-warning" role="alert" *ngIf="exist">
+    Test Title already exist!
+   </div>
+   <div class="alert alert-success" role="alert" *ngIf="success">
+    Successful added!
+   </div>
+  <form>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Test Type</label><br>
+        <input type="radio" class="radio" name="examsType" [(ngModel)]="examsType" value="MC" (input)="clear()"/> Multiple Choice &nbsp;
+       <input type="radio" class="radio" name="examsType" [(ngModel)]="examsType" value="E" (input)="clear()"/> Essay 
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Select Course</label>
+      <select [formControl]="dropdown" class="form-control" id="exampleFormControlSelect1" (input)="clear()">
+        <option [value]="i.courseId" *ngFor="let i of course" >{{ i.courseName }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="dateOfBirth">Test Title</label>
+      <div class="input-group">
+        <input id="addCourse" class="form-control" placeholder="Enter Test Title" name="examsTitle" [(ngModel)]="examsTitle" (input)="clear()"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Test Rules</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="examsRule" [(ngModel)]="examsRule" (input)="clear()"></textarea>
+    </div>
+    <!-- Date -->
+    <div class="form-group">
+      <label>Date</label>
+      <br/>
+      <div class="input-group">
+        <input class="form-control form-control-lg" placeholder="yyyy-mm-dd" name="date" [(ngModel)]="date" ngbDatepicker #d="ngbDatepicker" (input)="clear()"/>
+        <div class="input-group-append">
+          <button class="btn btn-lg btn-outline-secondary calendar" (click)="d.toggle()" type="button" (input)="clear()">
+            <fa-icon [icon]="faCalendar"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Date -->
+    <!-- Time Start and Time Ends-->
+    <div class="row mt-4">
+      <div class="col-md-6 time">
+        <label>Start Time</label>
+        <ngb-timepicker name="timeStart" [(ngModel)]="timeStart" (input)="clear()"></ngb-timepicker>
+      </div>
+  
+      <div class="col-md-6 time">
+        <label>End Time</label>
+        <ngb-timepicker name="timeEnd" [(ngModel)]="timeEnd" (input)="clear()"></ngb-timepicker>
+      </div>
+    </div>
+    <!-- Time Start and Time End -->
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary mr-3" (click)="activeModal.dismiss('Cross click')">Cancel</button>
+  <button type="button" class="btn btn-primary" (click)="addExam()">{{ add }}</button>
+</div>

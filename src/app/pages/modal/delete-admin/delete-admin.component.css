@@ -1,0 +1,17 @@
+.modal-header #modal-basic-title {
+    position: relative;
+    left: 175px;
+  }
+  
+  #dialog-window {
+    height: 400px;
+  }
+  
+  #scrollable-content {
+    height: 380px;
+    overflow: auto;
+  }
+  
+  #footer {
+    height: 20px;
+  }

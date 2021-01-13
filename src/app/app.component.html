@@ -1,0 +1,86 @@
+  <header class="sticky"  *ngIf="isLoggedIn$ | async as isLoggedIn">
+    <a class="navbar-brand" href="#">
+      <img src="../assets/img/logo.png" class="logo-img" alt="" width="30" height="30">
+    </a>
+      <span>Turntabl Testing System</span>
+      <nav>
+        <ul>
+        <li>
+          <div ngbDropdown class="d-inline-block" *ngIf="isSuperAdmin$">
+              <button class="btn btn-outline-success" id="dropdownBasic1" ngbDropdownToggle>Grant Admin Access</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem (click)="openAdminFormModal()">Add Admin Account</button>
+                <button ngbDropdownItem (click)="openDeleteAdminFormModal()">Remove Admin Account</button> 
+              </div>
+          </div>
+          <li>
+            <div ngbDropdown class="d-inline-block">
+              <div class="btn" id="dropdownBasic1" ngbDropdownToggle>
+                <img
+                *ngIf="photo == null"
+                src="https://www.pngkit.com/png/detail/281-2812821_user-account-management-logo-user-icon-png.png"
+                width="40px"
+                height="30px"
+                alt="Profile"
+                class="user-icon-img"
+              />
+              <img
+                *ngIf="photo != null"
+                src="{{ photo }}"
+                width="25px"
+                alt="Profile"
+              />
+              </div>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem routerLink="/profile">Profile</button>
+                <button ngbDropdownItem (click)="signout()">Sign Out</button> 
+              </div>
+          </div>
+          </li>
+        </ul>
+      </nav>
+
+  </header>
+
+  <aside *ngIf="isLoggedIn$ | async as isLoggedIn">
+    <p> Menu </p>
+    <a routerLink="/admin-dashboard" routerLinkActive="active">
+      <i><fa-icon [icon]="faTachometerAlt"></fa-icon></i>
+      Dashboard
+    </a>
+    <a routerLink="/add-course" routerLinkActive="active">
+      <i><fa-icon [icon]="faBook"></fa-icon></i>
+      Course
+    </a>
+    <a routerLink="/add-exam" routerLinkActive="active">
+      <i><fa-icon [icon]="faFileAlt"></fa-icon></i>
+      Test
+    </a>
+    <a routerLink="/create-question" routerLinkActive="active">
+      <i><fa-icon [icon]="faQuestion"></fa-icon></i>
+      Set Questions
+    </a>
+    <a routerLink="/questions" routerLinkActive="active">
+      <i><fa-icon [icon]="faQuestionCircle"></fa-icon></i>
+      View Question
+    </a>
+    <a routerLink="/test" routerLinkActive="active">
+      <i><fa-icon [icon]="faFileAlt"></fa-icon></i>
+      Test Result
+    </a>
+    <a routerLink="/upload" routerLinkActive="active">
+      <i><fa-icon [icon]="faUserGraduate"></fa-icon></i>
+      Users
+    </a>
+    <a routerLink="/mark-exam" routerLinkActive="active">
+      <i><fa-icon [icon]="faMarker"></fa-icon></i>
+      Mark Test
+    </a>
+    <a routerLink="/feedback" routerLinkActive="active">
+      <i><fa-icon [icon]="faCommentDots"></fa-icon></i>
+      Suggestion Box
+    </a>
+  </aside>
+<div class="reserved">
+  <router-outlet></router-outlet>
+</div>

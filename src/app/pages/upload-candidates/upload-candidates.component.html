@@ -1,0 +1,81 @@
+<div class="wrapper">
+  <div class="main-content-wrapper">
+    <div *ngIf="successIsShown" class="success-msg">
+      <i class="fa fa-check"></i>
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorIsShown" class="error-msg">
+      <i class="fa fa-times-circle"></i>
+      {{ errorMessage }}
+    </div>
+    <div class="content-top mt-2">
+      <div class="total-candidates">
+        <div class="total-number-text">Total Number of Students :&nbsp;<b>{{ total_candidates }}</b></div>
+      </div>
+      <div class="total-users">
+        <div class="total-number-text">Total Number of Admins :&nbsp;<b>{{ users }}</b></div>
+      </div>
+    </div>
+    <span class="up" (click)="changeUpload()">{{ uploadChanger }}</span>
+    <div class="emptyCann" *ngIf="empty==0">
+      <img src="../../../assets/empty.png" alt="" width="300px">
+    </div>
+    <div *ngIf="empty!=0">
+    <div class="content-right" *ngIf="uploadUsers">
+      <div
+        class="custom-dropzone"
+        ngx-dropzone
+        [accept]="
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv'
+        "
+        (change)="onSelect($event)"
+      >
+        <ngx-dropzone-label>
+          <div class="caption">
+            <h2>Drag and Drop Excel / CSV file. Or Click to Select.</h2>
+          </div>
+        </ngx-dropzone-label>
+        <ngx-dropzone-image-preview
+          ngProjectAs="ngx-dropzone-preview"
+          *ngFor="let f of files"
+          [file]="f"
+          [removable]="true"
+          (removed)="onRemove(f)"
+        >
+          <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+        </ngx-dropzone-image-preview>
+      </div>
+      <button class="uploadFile" (click)="onClick()">Upload</button>
+    </div>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" *ngIf="!uploadUsers">
+      <ng-container matColumnDef="first_name">
+        <th mat-header-cell *matHeaderCellDef>First Name</th>
+        <td mat-cell *matCellDef="let student">{{ student.first_name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="last_name">
+        <th mat-header-cell *matHeaderCellDef>Last Name</th>
+        <td mat-cell *matCellDef="let student">{{ student.last_name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email Address</th>
+        <td mat-cell *matCellDef="let student">{{ student.email }}</td>
+      </ng-container>
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>User Role</th>
+        <td mat-cell *matCellDef="let student">
+          <div *ngIf="!student.role; then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock>student</ng-template>
+          <ng-template #elseBlock>admin</ng-template>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+    </table>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>

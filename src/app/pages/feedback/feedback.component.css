@@ -1,0 +1,28 @@
+.main-form {
+  background-color: #ffffff;
+  padding: 50px;
+  border: 2px solid lightgray;
+}
+.button-div button {
+  border-radius: 100px;
+  position: relative;
+  left: -13px;
+}
+
+@media screen and (max-width: 800px) {
+  .main-content-wrapper{
+    max-width: 100%;
+  }
+}
+
+.main-content-wrapper{
+  margin-left: 220px; 
+}
+
+.wrapper{
+  max-width:100%;
+  margin-left: 50px;
+  margin-top: 80px;
+  margin-right: 50px;
+  padding-top: 2em;
+}

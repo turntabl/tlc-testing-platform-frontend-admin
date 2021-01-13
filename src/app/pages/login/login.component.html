@@ -1,0 +1,19 @@
+<div class="main-container">
+    <div class="sub-container">
+        <div class="logo-wrapper">
+            <div class="logo">
+                 <span *ngIf="!loader"><img src="../../../assets/logo.png" width="280px"></span>
+                 <span *ngIf="loader"><img src="../../../assets/turntabl.gif" width="280px"></span>
+            </div>
+        </div>
+        <div class="form-wrapper">
+            <form>
+                <span>TLC Testing System</span>
+            </form>
+            <!-- <img src="https://cdn.icon-icons.com/icons2/2119/PNG/512/google_icon_131222.png" width="16px">  -->
+            <button class="google" type="submit" (click)="onSubmit()"><span>Sign In</span></button>
+        </div>
+        
+    </div>
+
+</div>

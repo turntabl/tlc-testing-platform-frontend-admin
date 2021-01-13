@@ -1,0 +1,34 @@
+<div class="wrapper">
+  <div class="main-content-wrapper">
+    <div class="main container">
+      <div class="row">
+        <div ngbDropdown class="w-45 mb-5 mx-auto">
+          <button class="btn btn-outline-info" id="dropdownBasic1" ngbDropdownToggle>Select Test to View Questions</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button *ngFor="let test of test" ngbDropdownItem (click)="getQuestion(test.test_id, test.test_title)">{{test.test_title}}</button>
+          </div>
+      </div>
+      </div>
+      <div class="emptyCann" *ngIf="empty==0">
+        <img src="../../../assets/empty.png" alt="" width="300px">
+      </div>
+      <div *ngIf="empty!=0">
+      <div class="hu" *ngIf="test_title!=null">
+        <h4 class="text-center text-info">{{ test_title }}</h4>
+      </div>
+        <div *ngFor="let question of questions; let i = index">
+          <div class="cont">
+            <span>{{ i + 1 }}. </span> {{ question.question }}<hr>
+            <div class="table" >
+              <ul id="horizontal-list">
+                <li *ngFor="let option of question.options; let i = index">
+                  <a style="margin-right: 50px;">option {{i + 1 }}: &emsp; &emsp;   {{ option.option }}</a>
+                </li>
+              </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+  </div>  
+</div>
+</div>

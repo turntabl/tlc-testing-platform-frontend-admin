@@ -1,0 +1,54 @@
+<div class="wrapper">
+  <div class="main-content-wrapper">
+    <div class="main container">
+      <div class="header mt-4 mb-4">
+        <h3 class="text-secondary ml-3">User Suggestions</h3>
+      </div>
+      <div class="alert alert-warning" role="alert" *ngIf="isError">
+        {{message}}
+       </div>
+       <div class="alert alert-success" role="alert" *ngIf="isSuccess">
+        {{message}}
+       </div>
+      <div class="main-table row">
+        <div class="col-md-10">
+          <table class="table table-striped">
+            <thead class="bg-info" style="color: #fff">
+              <tr style="font-size: 18px; text-indent: 3px">
+                <th scope="col">#</th>
+                <th scope="col">Suggestion</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let feedback of feedbacks; index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>
+                  {{
+                    feedback.message.length > 30
+                      ? (feedback.message | slice: 0:30) + "..........."
+                      : feedback.message
+                  }}
+                </td>
+                <td>
+                  <button
+                    class="btn btn-outline-info btn-sm"
+                    (click)="openViewFeedback(feedback)"
+                  >
+                    view
+                  </button>
+                  <button 
+                  class="btn btn-outline-danger btn-sm ml-3"
+                  (click)="deleteFeedback(feedback.id)"
+                  >
+                    delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

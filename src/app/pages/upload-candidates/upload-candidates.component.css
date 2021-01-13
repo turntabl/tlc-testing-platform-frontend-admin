@@ -1,0 +1,225 @@
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+
+@media screen and (max-width: 800px) {
+  .content-top{
+    max-width: 100%;
+  }
+  .custom-dropzone {
+    max-width: 90%;
+  }
+  .main-content-wrapper{
+    max-width: 100%;
+  }
+
+  .total-candidates{
+    min-width: 80%;
+    height: 20%;
+  }
+}
+
+
+.total-number-text {
+    font-size: 1.5vw;
+    text-align: center;
+}
+
+.content-right{
+  width: 100%;
+}
+
+.main-content-wrapper{
+  margin-left: 220px; 
+}
+
+.wrapper{
+  max-width:100%;
+  margin-left: 50px;
+  margin-top: 80px;
+  margin-right: 50px;
+  padding-top: 2em;
+}
+
+.total-candidates{
+  float: left;
+  width:40%;
+  border-radius: 7px;
+  background: linear-gradient( 190deg,  #0d9ec2, #1498b9, #0d677e);
+  padding:20px;
+}
+
+.total-users{
+  float: right;
+  width:40%;
+  border-radius: 7px;
+  background: linear-gradient( 190deg, #12bb47, #12973c, #127030);
+  padding:20px;
+}
+
+.content-top{
+  padding-top: 25px;
+  height: 200px;
+  width: 100%;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 20px;
+  margin-bottom: -90px;
+}
+
+
+div h2 {
+  font-size: 0.95vw;
+}
+
+.custom-dropzone {
+  width: 100%;
+  height: 200px;
+	background:#ACBFC4;
+	color: #fff;
+	border: 2px dashed #fff;
+	border-radius: 5px;
+  margin: 10px 100px 20px 0px;
+}
+
+.custom-dropzone.ngx-dz-hovered {
+  border: 5px solid rgb(235, 79, 79);
+}
+
+div button{
+    margin: 0;
+    color: rgb(19, 107, 107);;
+    background: #fff;
+    border: none;
+    width: 100%;
+    height: 40px;
+    margin-top: -20px;
+    margin-left: -4px;
+    border-radius: 4px;
+    border: 2px solid rgb(19, 107, 107);
+    transition: all .2s ease;
+    outline: none;
+    font-size: 12px;
+  }
+  div button:hover{
+    color: #fff;
+    background: rgb(19, 107, 107);
+      border: 2px solid #fff;
+      font-size: 15px;
+  }
+  div button:active{
+    border:0;
+  } 
+
+
+.success-msg,
+.error-msg {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+}
+
+.success-msg {
+  color: #fff;
+  background-color: #2A8D45;
+}
+
+.error-msg {
+  color: #D8000C;
+  background-color: #FFBABA;
+}
+
+table { 
+  width: 100%;
+	border-collapse: collapse; 
+	margin:50px auto;
+	}
+
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+  background:  #D6DEE0; 
+	}
+
+th { 
+	background: #428EA0; 
+	color: white; 
+	font-weight: normal;
+	}
+
+td, th { 
+	padding: 10px; 
+	text-align: left; 
+	font-size: 1.5vw;
+  }
+
+  tbody {
+    display:block;
+    height:250px;
+    overflow:auto;
+}
+  
+thead, tbody tr {
+    display:table;
+    width:98%;
+    table-layout:fixed;/* even columns width , fix width of table too*/
+}
+thead {
+    width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
+}
+
+
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	table { 
+	  	width: 100%; 
+	}
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr { border: 1px solid #ccc; }
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+		/* Label the data */
+		content: attr(data-column);
+
+		color: #000;
+		font-weight: bold;
+	}
+
+}
+.emptyCann{
+  max-width:100%;
+  padding-top: 3em;
+  text-align: center;
+}

@@ -1,0 +1,8 @@
+.modal-header #modal-basic-title {
+  position: relative;
+  left: 150px;
+}
+
+.form-group label {
+  font-size: 20px;
+}

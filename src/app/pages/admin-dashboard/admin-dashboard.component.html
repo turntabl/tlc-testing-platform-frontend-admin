@@ -1,0 +1,95 @@
+<div class="wrapper">
+  <div class="main-content-wrapper">
+  <div class="header">
+    <h3 class="text-secondary">{{role}}&nbsp;Dashboard</h3>
+    <p class="text-secondary">Welcome, {{ name }}</p> 
+  </div>
+
+  <div class="row std-info text-center mt-2">
+    <div class="col-md-4 info " id="fir">
+      <span class="txt-info">Total Courses</span>
+      <span class="txt-num">{{ numberOfCourses }}</span>
+    </div>
+
+    <div class="col-md-4 info" id="sec">
+      <span class="txt-info">Total Tests</span> 
+      <span class="txt-num">{{ numberOfExams }}</span>
+    </div>
+
+    <div class="col-md-4 info" id="thir">
+      <span class="txt-info">Total Users</span>
+      <span class="txt-num" style="position: relative; right: 0.5px">{{ numberOfUsers }}</span>
+    </div>
+  </div>
+  <!-- </div> end of std-info div -->
+
+  <!-- start Admin tasks -->
+  <div class="row admin-tsk mt-3" >
+    <div class="col-md-4 icon_div">
+      <div class="icon_div_inner" (click)="openCourseModal()">
+
+          <img src="../assets/img/online-learning1.png" alt />
+
+        <p>Add Course</p>
+      </div>
+    </div>
+
+    <div class="col-md-4 icon_div">
+      <div class="icon_div_inner" (click)="openExamModal()">
+
+          <img src="../assets/img/exam1.png" alt
+        />
+        <p>Create Test</p>
+      </div>
+    </div>
+
+    <div class="col-md-4 icon_div">
+      <div class="icon_div_inner" routerLink="/create-question">
+
+          <img src="../assets/img/question1.png" alt />
+
+        <p>Create Questions</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row admin-tsk mt-4">
+    <div class="col-md-4 icon_div">
+      <div class="icon_div_inner" routerLink="/feedback">
+
+          <img src="../assets/img/feedback1.png" alt />
+
+        <p>Suggestion Box</p>
+      </div>
+    </div>
+
+    <div class="col-md-4 icon_div">
+      <div class="icon_div_inner" routerLink="/mark-exam"> 
+
+          <img src="../assets/img/tick1.png" alt />
+
+        <p>Mark Test</p>
+      </div>
+    </div>
+
+    <div class="col-md-4 icon_div">
+      <div class="icon_div_inner" routerLink="/upload">
+
+          <img src="../assets/img/search1.png" alt />
+
+        <p>Users</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- images placed inside block elements to deal with a Firefox rendering bug affecting  scaled flexbox images -->
+
+  <!--End Admin tasks -->
+
+  <div class="trial">
+    <!-- <button (click)="openModal()">Open Modal</button> -->
+    <!-- <a (click)="openModal()">About</a> -->
+  </div>
+  <!-- End of main div -->
+  </div>
+</div>

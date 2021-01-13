@@ -1,0 +1,44 @@
+.main-form {
+  background-color: #ffffff;
+  padding: 50px;
+  border: 2px solid lightgray;
+}
+
+.test-info {
+  background-color: #ffffff;
+  padding: 17px;
+  border: 2px solid lightgray;
+}
+
+.button-div button {
+  border-radius: 100px;
+  position: relative;
+  left: -13px;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #c97676;
+}
+/* this is for normal tabs */
+.nav-tabs .nav-link {
+  color: #6c757d;
+}
+
+@media screen and (max-width: 800px) {
+  .main-content-wrapper{
+    max-width: 100%;
+  }
+}
+
+.main-content-wrapper{
+  margin-left: 220px; 
+}
+
+.wrapper{
+  max-width:100%;
+  margin-left: 50px;
+  margin-top: 80px;
+  margin-right: 50px;
+  padding-top: 2em;
+}

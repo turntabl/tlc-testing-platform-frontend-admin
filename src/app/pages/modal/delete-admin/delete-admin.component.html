@@ -1,0 +1,53 @@
+<div class="modal-header">
+  <h5 class="modal-title text-center text-info" id="modal-basic-title">
+    Delete Admin
+  </h5>
+  <h5
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </h5>
+</div>
+
+<div class="modal-body">
+  <div class="mb-4" id="dialog-window">
+    <div class="alert alert-danger" role="alert" *ngIf="isError">
+      {{message}}
+     </div>
+     <div class="alert alert-success" role="alert" *ngIf="isSuccess">
+      {{message}}
+     </div>
+    <div class="main-table row" id="scrollable-content">
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <thead class="bg-info" style="color: #fff">
+          <tr style="font-size: 18px; text-indent: 3px">
+            <th scope="col">#</th>
+            <th scope="col">Email</th>
+            <th scope="col">Action</th>
+            <!-- <th scope="col">Population</th> -->
+          </tr>
+        </thead>
+    <tbody>
+    <tr *ngFor="let user of users; let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{user.email}}</td>
+      <td>
+              <button class="btn btn-outline-danger btn-sm ml-3" (click)="removeUser(user.user_id)">delete</button>
+            </td>
+      
+    </tr>    
+  </tbody>
+  </table>
+  </div>
+  <div id="footer">
+
+  </div>
+  </div>
+  </div>
+  </div>
+  
+
+ 

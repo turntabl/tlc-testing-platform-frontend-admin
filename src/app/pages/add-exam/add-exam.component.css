@@ -1,0 +1,43 @@
+.main-form {
+  background-color: #ffffff;
+  padding: 50px;
+  border: 2px solid lightgray;
+}
+
+.main-form .forms {
+  position: relative;
+  left: 70px;
+}
+
+.buttons button {
+  margin-left: 300px;
+  margin-top: 10px;
+  /* border-radius: 50px; */
+}
+
+.form-group label {
+  font-size: 17px;
+  /* color: #e79696; */
+  color: #078a9e;
+
+  font-weight: bold;
+}
+
+@media screen and (max-width: 800px) {
+  .main-content-wrapper{
+    max-width: 100%;
+  }
+}
+
+.main-content-wrapper{
+  margin-left: 220px; 
+}
+
+.wrapper{
+  max-width:100%;
+  margin-left: 50px;
+  margin-top: 80px;
+  margin-right: 50px;
+  padding-top: 2em;
+}
+

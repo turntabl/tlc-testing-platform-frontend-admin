@@ -1,0 +1,49 @@
+<div class="emptyCan" *ngIf="empty==0">
+  <img src="../../../assets/empty.png" alt="" width="300px">
+</div>
+<div class="wrapper" *ngIf="empty!=0">
+  <div class="main-content-wrapper">
+<div class="main container">
+  <div class="header mt-4 mb-4">
+    <h3 class="text-secondary ml-3">Manage Test</h3>
+  </div>
+
+  <div class="main-table row">
+    <div class="col-md-10">
+      <table class="table table-striped" *ngIf="allTests!=null">
+        <thead class="bg-info" style="color: #fff">
+          <tr style="font-size: 18px; text-indent: 3px">
+            <th scope="col">#</th>
+            <th scope="col">Test Title</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let test of allTests; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              {{ test.test_title }}
+            </td>
+            <td>
+              <button class="btn btn-outline-primary btn-sm" (click)="openUpdateExamModal(
+                test.question_type,
+                test.test_date,
+                test.test_id,
+                test.test_title,
+                test.test_rules,
+                test.test_time_end,
+                test.test_time_start,
+                test.course_name
+
+              )">view</button>
+              <button class="btn btn-outline-success btn-sm ml-3">mark</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h6 *ngIf="allTests==null">No Test Available</h6>
+    </div>
+  </div>
+</div>
+  </div>
+</div>

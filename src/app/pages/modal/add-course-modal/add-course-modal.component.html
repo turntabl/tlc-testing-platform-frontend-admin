@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h5 class="modal-title text-center" id="modal-basic-title">Add Course</h5>
+  <h5
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </h5>
+</div>
+<div class="modal-body">
+  <div class="alert alert-danger" role="alert" *ngIf="notEmpty">
+    Enter a course name!
+   </div>
+   <div class="alert alert-warning" role="alert" *ngIf="exist">
+    Course name already exist!
+   </div>
+   <div class="alert alert-success" role="alert" *ngIf="success">
+    Successful added!
+   </div>
+   <div class="alert alert-warning" role="alert" *ngIf="error">
+    Check internet connection!
+   </div>
+  <form>
+    <div class="form-group">
+      <div class="input-group">
+        <input id="addCourse" class="form-control" placeholder="Course Name" name="addcourse" [(ngModel)]="addcourse" (input)="clear()">
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary mr-3" (click)="activeModal.dismiss('Cross click')">Close</button>
+  <button type="button" class="btn btn-primary" (click)="addCourse()">{{ add }}</button>
+</div>
