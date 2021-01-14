@@ -125,4 +125,8 @@ export class UploadCandidatesComponent implements OnInit, AfterViewInit {
       this.uploadChanger="Done";
     }
   }
+
+  get numberOfUsers(){
+    return this.userService.total_users;
+ }
 }
