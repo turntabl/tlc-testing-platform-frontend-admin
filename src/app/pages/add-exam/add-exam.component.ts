@@ -33,8 +33,8 @@ export class AddExamComponent implements OnInit {
     testId: number,
     testTitle: string,
     testRule: string,
-    testTimeStart: string,
     testTimeEnd: string,
+    testTimeStart: string,
     courseName: string
   ) {
     const modalRef =  this.modalService.open(UpdateExamModalComponent);
@@ -44,8 +44,8 @@ export class AddExamComponent implements OnInit {
       test_id: testId,
       test_title: testTitle,
       test_rule: testRule,
-      test_time_end: testTimeEnd,
-      test_time_start: testTimeStart,
+      test_time_end:testTimeEnd,
+      test_time_start:testTimeStart,
       course_name: courseName
     };
     modalRef.componentInstance.onExamUpdate.subscribe((data: { test_id: number; test_title:string;})=> {
@@ -58,9 +58,6 @@ export class AddExamComponent implements OnInit {
     });
  
   }
-
-  
-
 
   getAllTests() {
     this.examsService.getAllExams().subscribe((result) => {

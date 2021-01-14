@@ -1,5 +1,10 @@
 <div class="wrapper">
-  <div class="main-content-wrapper">
+  <ng-template #showEmptyCan>
+    <div class="emptyCan">
+      <img src="../../../assets/empty.png" alt="" width="300px">
+    </div>
+  </ng-template>
+  <div class="main-content-wrapper" *ngIf="test.length!=0;else showEmptyCan">
     <div class="main container">
       <div class="row">
         <div ngbDropdown class="w-45 mb-5 mx-auto">

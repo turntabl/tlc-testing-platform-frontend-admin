@@ -23,7 +23,6 @@ export class DeleteAdminComponent implements OnInit {
 
   getAllUsers(){
     this.userService.getAllUsers().subscribe((users)=>{
-      console.log(users);
         this.users = users;
     });
   }

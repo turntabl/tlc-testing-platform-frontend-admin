@@ -17,9 +17,6 @@
       </div>
     </div>
     <span class="up" (click)="changeUpload()">{{ uploadChanger }}</span>
-    <div class="emptyCann" *ngIf="total_users==0">
-      <img src="../../../assets/empty.png" alt="" width="300px">
-    </div>
     <div *ngIf="total_users!=0">
     <div class="content-right" *ngIf="uploadUsers">
       <div

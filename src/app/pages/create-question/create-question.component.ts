@@ -45,12 +45,11 @@ export class CreateQuestionComponent implements OnInit {
   ngOnInit(): void {
     this.auth.notLogin();
     this.getAllExams();
-     this.subscription = this.dropdown.valueChanges.subscribe(value => {this.testId = value; console.log(value)});
+     this.subscription = this.dropdown.valueChanges.subscribe(value => {this.testId = value;});
      this.user_id = this.auth.checkLogin();
   }
 
   addQuestion(){
-    console.log("id here", this.testId);
     if (this.testId!=null && this.question!=null && this.option1!=null && this.option2!=null && this.option3!=null && this.option4!=null && this.mark!=null && this.validAnswer!=null) {
       this.submit="Submitting...";
         this.questionServie.addQuestion({
@@ -61,7 +60,6 @@ export class CreateQuestionComponent implements OnInit {
         validAnswer: this.validAnswer,
         mark_allocated: this.mark
        }).subscribe(result => {
-         console.log(result)
           if(JSON.parse(JSON.stringify(result)).message=="Success"){
             this.success=true;
             this.submit="Submit";
@@ -89,11 +87,9 @@ export class CreateQuestionComponent implements OnInit {
   }
 
   onSelect(event: { addedFiles: any }) {
-    console.log(event);
     this.files.push(...event.addedFiles);
   }
   onRemove(event: any) {
-    console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
   sendFile(file: any) {
@@ -101,8 +97,6 @@ export class CreateQuestionComponent implements OnInit {
     let formData:FormData = new FormData();
     formData.set('file', file);
     formData.set('test_id', this.uploadTestID.toString());
-    console.log(formData.get('test_id'));
-    console.log(formData.get('file'));
     this.uploadService
       .sendQuestionsFormData(formData)
       .subscribe((event) => {

@@ -62,7 +62,7 @@ export class AddExamModalComponent implements OnInit {
         course_id: this.courseId, 
         test_title: this.examsTitle,
         questions_type: this.examsType, 
-        test_rules: this.examsRule, 
+        test_rule: this.examsRule, 
         test_date: this.examsDate, 
         test_time_start: this.examsTimeStart, 
         test_time_end: this.examsTimeEnd,

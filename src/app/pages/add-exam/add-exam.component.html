@@ -1,9 +1,11 @@
-<div class="emptyCan" *ngIf="empty==0">
-  <img src="../../../assets/empty.png" alt="" width="300px">
-</div>
-<div class="wrapper" *ngIf="empty!=0">
-  <div class="main-content-wrapper">
-<div class="main container">
+<div class="wrapper">
+  <ng-template #showEmptyCan>
+    <div class="emptyCan">
+      <img src="../../../assets/empty.png" alt="" width="300px">
+    </div>
+  </ng-template>
+  <div class="main-content-wrapper" *ngIf="allTests.length!=0;else showEmptyCan">
+<div class="main container" >
   <div class="header mt-4 mb-4">
     <h3 class="text-secondary ml-3">Manage Test</h3>
   </div>

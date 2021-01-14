@@ -5,7 +5,7 @@ export class Exams{
      course_id: number;
      test_title: string;
      questions_type: string;
-     test_rules: string;
+     test_rule: string;
      test_date: string;
      test_time_start: string;
      test_time_end: string;

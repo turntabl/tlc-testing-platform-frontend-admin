@@ -1,11 +1,10 @@
-<div class="emptyCan" *ngIf="error">
-  <img src="../../../assets/error.png" alt="" width="300px">
-</div>
-<div class="emptyCan" *ngIf="empty">
-  <img src="../../../assets/empty.png" alt="" width="300px">
-</div>
-<div class="wrapper" *ngIf="!error">
-  <div class="main-content-wrapper">
+<div class="wrapper">
+  <ng-template #showEmptyCan>
+    <div class="emptyCan">
+      <img src="../../../assets/empty.png" alt="" width="300px">
+    </div>
+  </ng-template>
+  <div class="main-content-wrapper" *ngIf="results.length!=0;else showEmptyCan">
 <div class="main container">
     
   <div class="header mt-4 mb-4">

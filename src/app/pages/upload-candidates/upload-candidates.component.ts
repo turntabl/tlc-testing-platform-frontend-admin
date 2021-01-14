@@ -59,11 +59,9 @@ export class UploadCandidatesComponent implements OnInit, AfterViewInit {
   }
 
   onSelect(event: { addedFiles: any }) {
-    console.log(event);
     this.files.push(...event.addedFiles);
   }
   onRemove(event: any) {
-    console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
   sendFile(file: any) {
@@ -73,11 +71,7 @@ export class UploadCandidatesComponent implements OnInit, AfterViewInit {
       .sendFormData(formData)
       .subscribe((event: UploadResponse) => {
         if (typeof event === 'object') {
-          console.log(event.message);
           if (event.status_code === 200) {
-            console.log(event);
-            console.log(event.addStudentSaveResponse.atomicInteger);
-            console.log(event.addStudentSaveResponse.studentList.length);
             this.total_candidates += event.addStudentSaveResponse.atomicInteger;
             this.students = this.students.concat(
               event.addStudentSaveResponse.studentList
