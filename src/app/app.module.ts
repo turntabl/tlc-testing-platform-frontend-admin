@@ -105,7 +105,7 @@ import { AuthGuard } from './services/auth/auth.guard';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '979127420535-qqq5smupp9v5an16o6phles71f9ihqm2.apps.googleusercontent.com'
+              '979127420535-m8uqm92aa4qa7flbum8drmc1gfejb9s3.apps.googleusercontent.com'
             ),
           },
         ],
