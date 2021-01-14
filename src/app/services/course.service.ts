@@ -17,7 +17,7 @@ export class CourseService extends BackendService {
     super();
   }
 
-  addCourse(course: Course){
+  addCourse(course: Course):Observable<any>{
     return this.http.post(`${this.baseURL}/api/course/add`,course);
   }
 
@@ -25,7 +25,7 @@ export class CourseService extends BackendService {
     return this.http.get<any>(`${this.baseURL}/api/courses/get`);
   }
 
-  updateCourse(courseUpdate: CourseUpdate){
+  updateCourse(courseUpdate: CourseUpdate):Observable<any>{
     return this.http.post(`${this.baseURL}/api/course/update`,courseUpdate);
   }
 

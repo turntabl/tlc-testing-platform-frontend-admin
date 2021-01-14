@@ -19,7 +19,7 @@ export class CreateQuestionComponent implements OnInit {
   files: any[] = [];
   active = 1;
   dropdown = new FormControl();
-  test: Exams[]=[];
+  test: any;
   testId: number;
   question: string;
   option1:string;

@@ -13,7 +13,7 @@ export class QuestionsPageComponent implements OnInit {
   test_id: number;
   test_title: string;
   questions: Question[] = [];
-  test: Exams[] = [];
+  test: any;
   empty: number;
 
   constructor(

@@ -4,6 +4,7 @@ import { UpdateExamModalComponent } from 'src/app/pages/modal/update-exam-modal/
 import { Exams } from 'src/app/model/Exams';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { ExamsService } from 'src/app/services/exams.service';
+import { AddExamModalComponent } from '../modal/add-exam-modal/add-exam-modal.component';
 
 @Component({
   selector: 'app-add-exam',
@@ -11,7 +12,7 @@ import { ExamsService } from 'src/app/services/exams.service';
   styleUrls: ['./add-exam.component.css'],
 })
 export class AddExamComponent implements OnInit {
-  allTests: Exams[] = [];
+  allTests: any;
   userId!: string;
   empty: number;
 
@@ -57,6 +58,15 @@ export class AddExamComponent implements OnInit {
       }
     });
  
+  }
+
+  openExamModal() {
+    const modalRef = this.modalService.open(AddExamModalComponent);
+    modalRef.componentInstance.onExamAdd.subscribe((data:{test_id:number, course_id:number, course_name:string, questions_type:string,test_title:string,test_rule:string,test_date:string,test_time_start:string,test_time_end:string,user_id:string})=> {
+      if(data!==null){
+          this.allTests.push(data);
+      }
+  });
   }
 
   getAllTests() {

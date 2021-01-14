@@ -85,7 +85,7 @@ export class AppComponent {
     this.candidateUploadService.getAllStudents().subscribe(result=> {
       if (result!=null) {
         this.userService.getAllUsers().subscribe((users)=>{
-          this.userService.total_users = result.length + users.length;
+          this.userService.total_users += result.length + users.length;
       });
       }
     })

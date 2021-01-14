@@ -35,13 +35,13 @@ export class AddCourseModalComponent implements OnInit {
     if (this.addcourse!=null) {
       this.add = "Adding...";
       this.courseService.addCourse({courseName: this.addcourse, user_id: this.user_id}).subscribe(response=>{
-        if(JSON.parse(JSON.stringify(response)).message=="success"){
-          this.onCourseAdd.emit(true);
+        if(response.message=="success"){
+          this.onCourseAdd.emit({courseName: this.addcourse, courseId: response.courseId});
           this.add = "Add";
           this.success=true;
           setTimeout(() => (this.activeModal.dismiss('Cross click')), 1500);
-        }else if(JSON.parse(JSON.stringify(response)).message=="duplicate course name"){
-          this.onCourseAdd.emit(false);
+        }else if(response.message=="duplicate"){
+          this.onCourseAdd.emit(null);
           this.add = "Add";
           this.exist=true;
         }

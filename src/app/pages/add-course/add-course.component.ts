@@ -5,6 +5,7 @@ import { UpdateCourseModalComponent } from 'src/app/pages/modal/update-course-mo
 import { CourseUpdate } from 'src/app/model/CourseUpdate';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { CourseService } from 'src/app/services/course.service';
+import { AddCourseModalComponent } from '../modal/add-course-modal/add-course-modal.component';
 
 @Component({
   selector: 'app-add-course',
@@ -35,6 +36,15 @@ export class AddCourseComponent implements OnInit {
           element.courseName = data.courseName;
         }
       }
+    });
+  }
+
+  openCourseModal() {
+    const modalRef = this.modalService.open(AddCourseModalComponent);
+    modalRef.componentInstance.onCourseAdd.subscribe((data: {courseName: string, courseId: number})=> {
+        if(data!==null){
+         this.courses.push({courseId: data.courseId , courseName: data.courseName})
+        }
     });
   }
 

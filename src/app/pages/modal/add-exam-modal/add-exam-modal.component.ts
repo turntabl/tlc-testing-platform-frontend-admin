@@ -68,13 +68,13 @@ export class AddExamModalComponent implements OnInit {
         test_time_end: this.examsTimeEnd,
         user_id: this.user_id })
       .subscribe(result => {
-        if (JSON.parse(JSON.stringify(result)).message=="success") {
-          this.onExamAdd.emit(true);
+        if (result.message=="success") {
+          this.onExamAdd.emit({test_id:result.test_id, course_id:result.course_id, course_name:result.course_name, questions_type:result.questions_type,test_title:result.test_title,test_rule:result.test_rule,test_date:result.test_date,test_time_start:result.test_time_start,test_time_end:result.test_time_end,user_id:result.user_id});
           this.add = "Add";
           this.success=true;
           setTimeout(() => ( this.activeModal.dismiss('Cross click')), 1500);
-        }else if (JSON.parse(JSON.stringify(result)).message=="duplicate test title") {
-          this.onExamAdd.emit(false);
+        }else if (result.message=="duplicate") {
+          this.onExamAdd.emit(null);
           this.add = "Add";
           this.exist=true;
         }

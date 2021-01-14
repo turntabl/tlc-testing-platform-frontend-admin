@@ -23,14 +23,14 @@ export class ExamsService extends BackendService {
     super();
   }
 
-  addExams(exams: Exams) {
+  addExams(exams: Exams):Observable<any> {
     return this.http.post(
       `${this.baseURL}/api/test/add`,
       exams
     );
   }
 
-  getAllExams(): Observable<Exams[]> {
+  getAllExams(): Observable<any> {
     return this.http.get<any>(`${this.baseURL}/api/test/all`);
   }
 
