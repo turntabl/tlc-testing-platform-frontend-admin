@@ -1,6 +1,12 @@
+
 <div class="wrapper">
+  <ng-template #showEmptyCan>
+    <div class="emptyCan">
+      <img src="../../../assets/empty.png" alt="" width="300px">
+    </div>
+  </ng-template>
   <div class="main-content-wrapper">
-    <div class="main container">
+    <div class="main container" *ngIf="feedbacks.length!=0;else showEmptyCan">
       <div class="header mt-4 mb-4">
         <h3 class="text-secondary ml-3">User Suggestions</h3>
       </div>
