@@ -52,11 +52,15 @@ export class AddExamComponent implements OnInit {
       test_time_start:testTimeStart,
       course_name: courseName
     };
-    modalRef.componentInstance.onExamUpdate.subscribe((data: { test_id: number; test_title:string;})=> {
+    modalRef.componentInstance.onExamUpdate.subscribe((data: { test_id: number; test_title:string; test_time_start:string;test_time_end:string;test_date:string;test_rule:string})=> {
       for (let index = 0; index < this.allTests.length; index++) {
         const element = this.allTests[index];
         if(element.test_id === data.test_id){
           element.test_title = data.test_title;
+          element.test_date = data.test_date;
+          element.test_rule = data.test_rule;
+          element.test_time_start = data.test_time_start;
+          element.test_time_end = data.test_time_end;
         }
       }
     });
