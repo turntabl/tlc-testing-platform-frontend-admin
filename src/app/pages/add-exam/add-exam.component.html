@@ -8,11 +8,10 @@
     <button class="btn btn-outline-info btn-sm addExam" (click)="openExamModal()">add test</button>
   </div>
   <div class="main-content-wrapper" *ngIf="allTests.length!=0;else showEmptyCan">
+    <div class="header mt-4 mb-4">
+      <h3 class="text-secondary ml-3">Manage Test</h3>
+    </div>
 <div class="main container" >
-  <div class="header mt-4 mb-4">
-    <h3 class="text-secondary ml-3" style="float: left;">Manage Test</h3>
-  </div>
-
   <div class="main-table row">
     <div class="alert alert-danger" role="alert" *ngIf="isError">
       {{message}}
@@ -26,7 +25,6 @@
           <tr style="font-size: 18px; text-indent: 3px">
             <th scope="col">#</th>
             <th scope="col">Test Title</th>
-            <th scope="col">Test Type</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -35,9 +33,6 @@
             <th scope="row">{{ i + 1 }}</th>
             <td>
               {{ test.test_title }}
-            </td>
-            <td>
-              {{ test.questions_type }}
             </td>
             <td>
               <button class="btn btn-outline-primary btn-sm" (click)="openUpdateExamModal(

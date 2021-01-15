@@ -26,4 +26,5 @@
 
 .addCourseWrapper{
   float: right; margin-right: 140px;
+  clear:right;
 }
