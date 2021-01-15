@@ -44,3 +44,11 @@
 .emptyCan{
   margin:-100px 0px 0px 0px;
 }
+
+.addExam{
+ width:200px;
+}
+
+.addExamWrapper{
+  float: right; margin-right: 140px;
+}

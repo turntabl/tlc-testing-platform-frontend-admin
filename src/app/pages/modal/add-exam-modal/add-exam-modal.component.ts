@@ -58,7 +58,6 @@ export class AddExamModalComponent implements OnInit {
     this.examsTimeEnd=JSON.stringify({hour: this.timeEnd.hour, minute: this.timeEnd.minute});
     this.examsDate=JSON.stringify(this.date);
     this.examsService.addExams({ 
-        test_id:0,
         course_id: this.courseId, 
         test_title: this.examsTitle,
         questions_type: this.examsType, 
@@ -69,7 +68,7 @@ export class AddExamModalComponent implements OnInit {
         user_id: this.user_id })
       .subscribe(result => {
         if (result.message=="success") {
-          this.onExamAdd.emit({test_id:result.test_id, course_id:result.course_id, course_name:result.course_name, questions_type:result.questions_type,test_title:result.test_title,test_rule:result.test_rule,test_date:result.test_date,test_time_start:result.test_time_start,test_time_end:result.test_time_end,user_id:result.user_id});
+          this.onExamAdd.emit(result);
           this.add = "Add";
           this.success=true;
           setTimeout(() => ( this.activeModal.dismiss('Cross click')), 1500);

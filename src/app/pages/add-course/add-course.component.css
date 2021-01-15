@@ -19,3 +19,11 @@
 .emptyCan{
   margin:-100px 0px 0px 0px;
 }
+
+.addCourseButton{
+  width: 200px;
+}
+
+.addCourseWrapper{
+  float: right; margin-right: 140px;
+}

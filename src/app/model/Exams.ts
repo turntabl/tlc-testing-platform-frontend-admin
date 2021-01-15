@@ -1,7 +1,7 @@
-import { Time } from "@angular/common";
-
 export class Exams{
+     message:string;
      test_id:number;
+     course_name:string;
      course_id: number;
      test_title: string;
      questions_type: string;

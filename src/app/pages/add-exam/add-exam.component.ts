@@ -12,9 +12,12 @@ import { AddExamModalComponent } from '../modal/add-exam-modal/add-exam-modal.co
   styleUrls: ['./add-exam.component.css'],
 })
 export class AddExamComponent implements OnInit {
-  allTests: any;
+  allTests: Exams[] = [];
   userId!: string;
   empty: number;
+  message:string;
+  isSuccess:boolean;
+  isError:boolean;
 
   constructor(
     private auth: AuthenticateService,
@@ -62,11 +65,31 @@ export class AddExamComponent implements OnInit {
 
   openExamModal() {
     const modalRef = this.modalService.open(AddExamModalComponent);
-    modalRef.componentInstance.onExamAdd.subscribe((data:{test_id:number, course_id:number, course_name:string, questions_type:string,test_title:string,test_rule:string,test_date:string,test_time_start:string,test_time_end:string,user_id:string})=> {
+    modalRef.componentInstance.onExamAdd.subscribe((data:Exams)=> {
       if(data!==null){
           this.allTests.push(data);
       }
   });
+  }
+
+  deleteTest(test_id:number){
+    this.examsService.deleteExam(test_id).subscribe((result) => {
+      if(result.message === "success"){
+        for (let index = 0; index < this.allTests.length; index++) {
+          const element = this.allTests[index];
+          if(element.test_id == test_id){
+            this.allTests.splice(index,1);
+          }
+        }
+        this.message = "Successfully deleted course";
+        this.isSuccess = true;
+        setTimeout(() => ( this.isSuccess = false ), 5000);
+      }else{
+        this.message = "Error deleting Course";
+        this.isError = true;
+        setTimeout(() => ( this.isError = false ), 5000);
+      }
+    });
   }
 
   getAllTests() {

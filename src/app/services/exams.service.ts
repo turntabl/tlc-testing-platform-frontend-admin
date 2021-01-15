@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ExamRequest } from '../model/ExamRequest';
 import { Exams } from '../model/Exams';
 import { ExamsUpdate } from '../model/ExamsUpdate';
 import { BackendService } from './BackendService';
@@ -23,8 +24,8 @@ export class ExamsService extends BackendService {
     super();
   }
 
-  addExams(exams: Exams):Observable<any> {
-    return this.http.post(
+  addExams(exams: ExamRequest):Observable<Exams> {
+    return this.http.post<any>(
       `${this.baseURL}/api/test/add`,
       exams
     );
@@ -32,6 +33,10 @@ export class ExamsService extends BackendService {
 
   getAllExams(): Observable<any> {
     return this.http.get<any>(`${this.baseURL}/api/test/all`);
+  }
+
+  deleteExam(test_id:number){
+    return this.http.get<any>(`${this.baseURL}/api/test/delete/${test_id}`);
   }
 
   setUpdateExam(examsUpdate: ExamsUpdate) {

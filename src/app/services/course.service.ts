@@ -18,7 +18,7 @@ export class CourseService extends BackendService {
   }
 
   addCourse(course: Course):Observable<any>{
-    return this.http.post(`${this.baseURL}/api/course/add`,course);
+    return this.http.post<any>(`${this.baseURL}/api/course/add`,course);
   }
 
   getAllCourse():Observable<CourseUpdate[]>{
