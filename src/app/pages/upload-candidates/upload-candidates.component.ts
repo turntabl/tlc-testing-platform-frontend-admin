@@ -72,9 +72,9 @@ export class UploadCandidatesComponent implements OnInit, AfterViewInit {
       .subscribe((event: UploadResponse) => {
         if (typeof event === 'object') {
           if (event.status_code === 200) {
-            this.total_candidates += event.addStudentSaveResponse.atomicInteger;
+            this.total_candidates += event.t.atomicInteger;
             this.students = this.students.concat(
-              event.addStudentSaveResponse.studentList
+              event.t.studentList
             );
             this.successMessage = event.message;
             this.successIsShown = true;
