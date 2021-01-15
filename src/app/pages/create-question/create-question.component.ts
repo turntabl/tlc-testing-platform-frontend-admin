@@ -49,7 +49,7 @@ export class CreateQuestionComponent implements OnInit {
      this.user_id = this.auth.checkLogin();
   }
 
-  addQuestion(){
+  addMCQuestion(){
     if (this.testId!=null && this.question!=null && this.option1!=null && this.option2!=null && this.option3!=null && this.option4!=null && this.mark!=null && this.validAnswer!=null) {
       this.submit="Submitting...";
         this.questionServie.addQuestion({

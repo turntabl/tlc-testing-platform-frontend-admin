@@ -22,7 +22,7 @@
                 <label class="text-info">Select Test</label>
                 <select [(ngModel)]="uploadTestID" class="form-control" id="exampleFormControlSelect1">
                   <option [value]="0" >Select Test</option>
-                  <option [value]="i.test_id" *ngFor="let i of test" >{{ i.test_title }}</option>
+                  <option [value]="i.test_id" *ngFor="let i of test" ><div *ngIf="i.questions_type === 'MC'">{{i.test_title}}</div></option>
                 </select>
               </div>
                     <div
@@ -61,9 +61,7 @@
                       (input)="clear()"
                     >
                       <option [value]="0" >Select Test</option>
-                      <option [value]="i.test_id" *ngFor="let i of test">
-                        {{ i.test_title }}
-                      </option>
+                      <option [value]="i.test_id" *ngFor="let i of test" ><div *ngIf="i.questions_type === 'MC'">{{i.test_title}}</div></option>
                     </select>
                   </div>
                   <div class="form-group">
@@ -180,50 +178,170 @@
                   </div>
                   <div class="row mt-2 col-sm-8">
                     <div class="mt-2 button-div col-sm-5">
-                      <button type="button" class="btn btn-info btn-lg btn-block" (click)="addQuestion()">
+                      <button type="button" class="btn btn-info btn-lg btn-block" (click)="addMCQuestion()">
                         {{ submit }}
                       </button>
                     </div>
                   </div>
                 </form>
               </div>
-
           </ng-template>
         </li>
         <li [ngbNavItem]="2">
           <a ngbNavLink><h5>Essay Test</h5></a>
           <ng-template ngbNavContent>
-            <div class="main-form row">
-              <div class="col-md-10">
-                <form>
-                  <div class="form-group">
-                    <label class="text-info">Exam Title</label>
-                    <div class="input-group">
-                      <input
-                        id="addCourse"
-                        class="form-control form-control-lg"
-                        placeholder=""
-                        name="addCourse"
-                      />
+            <div class="alert alert-primary" role="alert" *ngIf="uploadMessage!=null">
+              {{ uploadMessage }}
+             </div>
+             <div class="alert alert-danger" role="alert" *ngIf="notEmpty">
+              All fields are required!
+             </div>
+             <div class="alert alert-warning" role="alert" *ngIf="exist">
+              Exam Title already exist!
+             </div>
+             <div class="alert alert-success" role="alert" *ngIf="success">
+              Successful added!
+             </div>
+             <span class="up" (click)="changeUpload()">{{ uploadChanger }}</span>
+             <div class="content-right mb-5" *ngIf="uploadQuestion">
+              <div class="form-group">
+                <label class="text-info">Select Test</label>
+                <select [(ngModel)]="uploadTestID" class="form-control" id="exampleFormControlSelect1">
+                  <option [value]="0" >Select Test</option>
+                  <option [value]="i.test_id" *ngFor="let i of test" ><div *ngIf="i.questions_type === 'E'">{{i.test_title}}</div></option>
+                </select>
+              </div>
+                    <div
+                      class="custom-dropzone"
+                      ngx-dropzone
+                      [accept]="'text/csv'"
+                      (change)="onSelect($event)"
+                    >
+                      <ngx-dropzone-label>
+                        <div class="caption">
+                          <h2>Upload Questions (CSV file format)</h2>
+                        </div>
+                      </ngx-dropzone-label>
+                      <ngx-dropzone-image-preview
+                        ngProjectAs="ngx-dropzone-preview"
+                        *ngFor="let f of files"
+                        [file]="f"
+                        [removable]="true"
+                        (removed)="onRemove(f)"
+                      >
+                        <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+                      </ngx-dropzone-image-preview>
                     </div>
+                    <button class="uploadFile" (click)="onClickEssay()">
+                      {{ upload }}
+                    </button>
+                  </div>
+                <div class="content-right mb-5" *ngIf="!uploadQuestion"> 
+                <form >
+                  <div class="form-group">
+                    <label class="text-info">Select Test</label>
+                    <select
+                      [formControl]="dropdown"
+                      class="form-control form-control-lg"
+                      id="exampleFormControlSelect1"
+                      (input)="clear()"
+                    >
+                      <option [value]="0" >Select Test</option>
+                      <option [value]="i.test_id" *ngFor="let i of test" ><div *ngIf="i.questions_type === 'E'">{{i.test_title}}</div></option>
+
+                    </select>
                   </div>
                   <div class="form-group">
                     <label class="text-info">Type Question</label>
-                    <textarea
-                      class="form-control form-control-lg"
-                      id="exampleFormControlTextarea1"
-                      rows="4"
-                    ></textarea>
+                    <pre><textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="name" [(ngModel)]="question" (input)="clear()"></textarea></pre>
                   </div>
-
-                  <div class="mt-4 button-div col-sm-4">
-                    <button type="button" class="btn btn-info btn-lg btn-block">
-                      Submit
-                    </button>
+                  <div class="row mt-2 col-sm-8">
+                    <div class="mt-2 button-div col-sm-5">
+                      <button type="button" class="btn btn-info btn-lg btn-block" (click)="addEssayQuestion()">
+                        {{ submit }}
+                      </button>
+                    </div>
                   </div>
                 </form>
               </div>
-            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="3">
+          <a ngbNavLink><h5>Code Snippet</h5></a>
+          <ng-template ngbNavContent>
+            <div class="alert alert-primary" role="alert" *ngIf="uploadMessage!=null">
+              {{ uploadMessage }}
+             </div>
+             <div class="alert alert-danger" role="alert" *ngIf="notEmpty">
+              All fields are required!
+             </div>
+             <div class="alert alert-warning" role="alert" *ngIf="exist">
+              Exam Title already exist!
+             </div>
+             <div class="alert alert-success" role="alert" *ngIf="success">
+              Successful added!
+             </div>
+             <span class="up" (click)="changeUpload()">{{ uploadChanger }}</span>
+             <div class="content-right mb-5" *ngIf="uploadQuestion">
+              <div class="form-group">
+                <label class="text-info">Select Test</label>
+                <select [(ngModel)]="uploadTestID" class="form-control" id="exampleFormControlSelect1">
+                  <option [value]="0" >Select Test</option>
+                  <option [value]="i.test_id" *ngFor="let i of test" ><div *ngIf="i.questions_type === 'CS'">{{i.test_title}}</div></option>
+                </select>
+              </div>
+                    <div
+                      class="custom-dropzone"
+                      ngx-dropzone
+                      [accept]="'text/csv'"
+                      (change)="onSelect($event)"
+                    >
+                      <ngx-dropzone-label>
+                        <div class="caption">
+                          <h2>Upload Questions (CSV file format)</h2>
+                        </div>
+                      </ngx-dropzone-label>
+                      <ngx-dropzone-image-preview
+                        ngProjectAs="ngx-dropzone-preview"
+                        *ngFor="let f of files"
+                        [file]="f"
+                        [removable]="true"
+                        (removed)="onRemove(f)"
+                      >
+                        <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+                      </ngx-dropzone-image-preview>
+                    </div>
+                    <button class="uploadFile" (click)="onClickCS()">
+                      {{ upload }}
+                    </button>
+                  </div>
+                <div class="content-right mb-5" *ngIf="!uploadQuestion"> 
+                <form >
+                  <div class="form-group">
+                    <label class="text-info">Select Test</label>
+                    <select
+                      [formControl]="dropdown"
+                      class="form-control form-control-lg"
+                      id="exampleFormControlSelect1"
+                      (input)="clear()"
+                    >
+                      <option [value]="0" >Select Test</option>
+                      <option [value]="i.test_id" *ngFor="let i of test" ><div *ngIf="i.questions_type === 'CS'">{{i.test_title}}</div></option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="text-info">Insert Code Snippet</label>
+                    <pre><textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="name" [(ngModel)]="question" (input)="clear()"></textarea></pre>
+                  </div>
+                  <div class="row mt-2 col-sm-8">
+                    <div class="mt-2 button-div col-sm-5">
+                      <button type="button" class="btn btn-info btn-lg btn-block" (click)="addCSQuestion()">
+                        {{ submit }}
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
           </ng-template>
         </li>
   </ul>

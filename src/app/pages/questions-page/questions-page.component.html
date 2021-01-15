@@ -23,6 +23,11 @@
       </div>
         <div *ngFor="let question of questions; let i = index">
           <div class="cont">
+            <div style="float: right;">
+              <!-- <button class="btn btn-outline-info btn-sm ml-3">edit</button> -->
+              <button class="btn btn-outline-danger btn-sm ml-3" (click)="deleteQuestion(question.questionId)">delete</button>
+            </div>
+            <hr class="mb-5">
             <span>{{ i + 1 }}. </span> {{ question.question }}<hr>
             <div class="table" >
               <ul id="horizontal-list">

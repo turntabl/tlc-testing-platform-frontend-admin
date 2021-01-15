@@ -13,8 +13,12 @@ export class QuestionService extends BackendService  {
     super();
   }
 
-  addQuestion(question: Question){
+  addQuestion(question: {}){
     return this.http.post(`${this.baseURL}/api/question/add`,question);
+  }
+
+  deleteQuestion(question_id:number):Observable<any>{
+    return this.http.get<any>(`${this.baseURL}/api/question/delete/${question_id}`);
   }
 
 }
