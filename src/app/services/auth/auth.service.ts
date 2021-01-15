@@ -34,7 +34,7 @@ export class AuthService {
       if (this.googleUser!=null) {
         this.userService.getUserByEmail(this.googleUser.email).subscribe(response =>{
         if(response.message=="yes"){
-          this.superAdmin.next(response.role === 1?true:false);
+          this.superAdmin.next((response.role === 1)?true:false);
           this.loggedIn.next(true);
           this.user = response;
           this.authUser.next(response);
