@@ -6,7 +6,7 @@
       <nav>
         <ul>
         <li>
-          <div ngbDropdown class="d-inline-block" *ngIf="isSuperAdmin$">
+          <div ngbDropdown class="d-inline-block" *ngIf="isSuperAdmin">
               <button class="btn btn-outline-success" id="dropdownBasic1" ngbDropdownToggle>Grant Admin Access</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
             <button ngbDropdownItem (click)="openAdminFormModal()">Add Admin Account</button>
