@@ -4,7 +4,7 @@
     <li [ngbNavItem]="1">
       <a ngbNavLink><h5>Multiple Choice Test</h5></a>
       <ng-template ngbNavContent>
-            <div class="alert alert-primary" role="alert" *ngIf="uploadMessage!=null">
+            <div class="alert alert-primary" role="alert" *ngIf="uploadMessage!=''">
               {{ uploadMessage }}
              </div>
              <div class="alert alert-danger" role="alert" *ngIf="notEmpty">
@@ -22,7 +22,11 @@
                 <label class="text-info">Select Test</label>
                 <select [(ngModel)]="uploadTestID" class="form-control" id="exampleFormControlSelect1">
                   <option [value]="0" >Select Test</option>
-                  <option [value]="i.test_id" *ngFor="let i of test" ><div *ngIf="i.questions_type === 'MC'">{{i.test_title}}</div></option>
+                  <ng-container *ngFor="let i of test" >
+                    <ng-container  *ngIf="i.questions_type === 'MC'">
+                      <option [value]="i.test_id" >{{i.test_title}}</option>
+                    </ng-container>
+                  </ng-container>
                 </select>
               </div>
                     <div
@@ -46,7 +50,7 @@
                         <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
                       </ngx-dropzone-image-preview>
                     </div>
-                    <button class="uploadFile" (click)="onClick()">
+                    <button class="uploadFile" (click)="onMCClick()">
                       {{ upload }}
                     </button>
                   </div>
@@ -60,8 +64,12 @@
                       id="exampleFormControlSelect1"
                       (input)="clear()"
                     >
-                      <option [value]="0" >Select Test</option>
-                      <option [value]="i.test_id" *ngFor="let i of test" ><div *ngIf="i.questions_type === 'MC'">{{i.test_title}}</div></option>
+                    <option [value]="0" >Select Test</option>
+                    <ng-container *ngFor="let i of test" >
+                      <ng-container  *ngIf="i.questions_type === 'MC'">
+                        <option [value]="i.test_id" >{{i.test_title}}</option>
+                      </ng-container>
+                    </ng-container>
                     </select>
                   </div>
                   <div class="form-group">
@@ -186,11 +194,11 @@
                 </form>
               </div>
           </ng-template>
-        </li>
-        <li [ngbNavItem]="2">
+    </li>
+    <li [ngbNavItem]="2">
           <a ngbNavLink><h5>Essay Test</h5></a>
           <ng-template ngbNavContent>
-            <div class="alert alert-primary" role="alert" *ngIf="uploadMessage!=null">
+            <div class="alert alert-primary" role="alert" *ngIf="uploadMessage!=''">
               {{ uploadMessage }}
              </div>
              <div class="alert alert-danger" role="alert" *ngIf="notEmpty">
@@ -208,7 +216,11 @@
                 <label class="text-info">Select Test</label>
                 <select [(ngModel)]="uploadTestID" class="form-control" id="exampleFormControlSelect1">
                   <option [value]="0" >Select Test</option>
-                  <option [value]="i.test_id" *ngFor="let i of test" ><div *ngIf="i.questions_type === 'E'">{{i.test_title}}</div></option>
+                  <ng-container *ngFor="let i of test" >
+                    <ng-container  *ngIf="i.questions_type === 'E'">
+                      <option [value]="i.test_id" >{{i.test_title}}</option>
+                    </ng-container>
+                  </ng-container>
                 </select>
               </div>
                     <div
@@ -232,7 +244,7 @@
                         <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
                       </ngx-dropzone-image-preview>
                     </div>
-                    <button class="uploadFile" (click)="onClickEssay()">
+                    <button class="uploadFile" (click)="onEClick()">
                       {{ upload }}
                     </button>
                   </div>
@@ -247,7 +259,11 @@
                       (input)="clear()"
                     >
                       <option [value]="0" >Select Test</option>
-                      <option [value]="i.test_id" *ngFor="let i of test" ><div *ngIf="i.questions_type === 'E'">{{i.test_title}}</div></option>
+                      <ng-container *ngFor="let i of test" >
+                        <ng-container  *ngIf="i.questions_type === 'E'">
+                          <option [value]="i.test_id" >{{i.test_title}}</option>
+                        </ng-container>
+                      </ng-container>
 
                     </select>
                   </div>
@@ -255,9 +271,20 @@
                     <label class="text-info">Type Question</label>
                     <pre><textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="name" [(ngModel)]="question" (input)="clear()"></textarea></pre>
                   </div>
+                  <div class="form-group col-sm-4 mb-5 mt-2">
+                    <input
+                    style="background-color: rgb(218, 233, 187);"
+                      type="number"
+                      class="form-control form-control-lg"
+                      placeholder="Mark"
+                      name="option4"
+                      [(ngModel)]="mark"
+                      (input)="clear()"
+                    />
+                  </div>
                   <div class="row mt-2 col-sm-8">
                     <div class="mt-2 button-div col-sm-5">
-                      <button type="button" class="btn btn-info btn-lg btn-block" (click)="addEssayQuestion()">
+                      <button type="button" class="btn btn-info btn-lg btn-block" (click)="addEQuestion()">
                         {{ submit }}
                       </button>
                     </div>
@@ -265,11 +292,11 @@
                 </form>
               </div>
           </ng-template>
-        </li>
-        <li [ngbNavItem]="3">
+    </li>
+    <li [ngbNavItem]="3">
           <a ngbNavLink><h5>Code Snippet</h5></a>
           <ng-template ngbNavContent>
-            <div class="alert alert-primary" role="alert" *ngIf="uploadMessage!=null">
+            <div class="alert alert-primary" role="alert" *ngIf="uploadMessage!=''">
               {{ uploadMessage }}
              </div>
              <div class="alert alert-danger" role="alert" *ngIf="notEmpty">
@@ -287,7 +314,11 @@
                 <label class="text-info">Select Test</label>
                 <select [(ngModel)]="uploadTestID" class="form-control" id="exampleFormControlSelect1">
                   <option [value]="0" >Select Test</option>
-                  <option [value]="i.test_id" *ngFor="let i of test" ><div *ngIf="i.questions_type === 'CS'">{{i.test_title}}</div></option>
+                  <ng-container *ngFor="let i of test" >
+                    <ng-container  *ngIf="i.questions_type === 'CS'">
+                      <option [value]="i.test_id" >{{i.test_title}}</option>
+                    </ng-container>
+                  </ng-container>
                 </select>
               </div>
                     <div
@@ -311,7 +342,7 @@
                         <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
                       </ngx-dropzone-image-preview>
                     </div>
-                    <button class="uploadFile" (click)="onClickCS()">
+                    <button class="uploadFile" (click)="onCSClick()">
                       {{ upload }}
                     </button>
                   </div>
@@ -325,13 +356,28 @@
                       id="exampleFormControlSelect1"
                       (input)="clear()"
                     >
-                      <option [value]="0" >Select Test</option>
-                      <option [value]="i.test_id" *ngFor="let i of test" ><div *ngIf="i.questions_type === 'CS'">{{i.test_title}}</div></option>
+                    <option [value]="0" >Select Test</option>
+                    <ng-container *ngFor="let i of test" >
+                      <ng-container  *ngIf="i.questions_type === 'CS'">
+                        <option [value]="i.test_id" >{{i.test_title}}</option>
+                      </ng-container>
+                    </ng-container>
                     </select>
                   </div>
                   <div class="form-group">
                     <label class="text-info">Insert Code Snippet</label>
                     <pre><textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="name" [(ngModel)]="question" (input)="clear()"></textarea></pre>
+                  </div>
+                  <div class="form-group col-sm-4 mb-5 mt-2">
+                    <input
+                    style="background-color: rgb(218, 233, 187);"
+                      type="number"
+                      class="form-control form-control-lg"
+                      placeholder="Mark"
+                      name="option4"
+                      [(ngModel)]="mark"
+                      (input)="clear()"
+                    />
                   </div>
                   <div class="row mt-2 col-sm-8">
                     <div class="mt-2 button-div col-sm-5">
@@ -343,7 +389,7 @@
                 </form>
               </div>
           </ng-template>
-        </li>
+    </li>
   </ul>
   <div [ngbNavOutlet]="nav" class="mt-4"></div>
   </div>

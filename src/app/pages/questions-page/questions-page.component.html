@@ -10,14 +10,44 @@
         <div ngbDropdown class="w-45 mb-5 mx-auto">
           <button class="btn btn-outline-info" id="dropdownBasic1" ngbDropdownToggle>Select Test to View Questions</button>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <button *ngFor="let test of test" ngbDropdownItem (click)="getQuestion(test.test_id, test.test_title)">{{test.test_title}}</button>
+        <button *ngFor="let test of test" ngbDropdownItem (click)="getQuestion(test.test_id, test.test_title, test.questions_type)">{{test.test_title}} ({{test.questions_type}})</button>
           </div>
       </div>
       </div>
       <div class="emptyCann" *ngIf="empty==0">
         <img src="../../../assets/empty.png" alt="" width="300px">
       </div>
-      <div *ngIf="empty!=0">
+      <div *ngIf="empty!=0 && question_type=='E'">
+      <div class="hu" *ngIf="test_title!=null">
+        <h4 class="text-center text-info">{{ test_title }}</h4>
+      </div>
+        <div *ngFor="let question of questions; let i = index">
+          <div class="cont">
+            <div style="float: right;">
+              <!-- <button class="btn btn-outline-info btn-sm ml-3">edit</button> -->
+              <button class="btn btn-outline-danger btn-sm ml-3" (click)="deleteQuestion(question.questionId)">delete</button>
+            </div>
+            <hr class="mb-5">
+            <span>{{ i + 1 }}. </span> {{ question.question }}<hr>
+        </div>
+        </div>
+    </div>
+    <div *ngIf="empty!=0 && question_type=='CS'">
+      <div class="hu" *ngIf="test_title!=null">
+        <h4 class="text-center text-info">{{ test_title }}</h4>
+      </div>
+        <div *ngFor="let question of questions; let i = index">
+          <div class="cont">
+            <div style="float: right;">
+              <!-- <button class="btn btn-outline-info btn-sm ml-3">edit</button> -->
+              <button class="btn btn-outline-danger btn-sm ml-3" (click)="deleteQuestion(question.questionId)">delete</button>
+            </div>
+            <hr class="mb-5">
+            <span>{{ i + 1 }}. </span> {{ question.question }}<hr>
+        </div>
+        </div>
+    </div>
+    <div *ngIf="empty!=0 && question_type=='MC'">
       <div class="hu" *ngIf="test_title!=null">
         <h4 class="text-center text-info">{{ test_title }}</h4>
       </div>

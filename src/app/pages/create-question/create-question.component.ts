@@ -34,10 +34,12 @@ export class CreateQuestionComponent implements OnInit {
   success: boolean=false;
   submit: string="Submit";
   user_id: string;
-  uploadMessage: string;
+  uploadMessage: string = '';
   upload: string = "Upload";
   uploadQuestion: boolean=false;
   uploadChanger: string="Upload Questions";
+  isSuccess:boolean;
+  isError:boolean;
 
 
   constructor(private auth: AuthenticateService, private questionServie: QuestionService, private examsService: ExamsService, private uploadService:CandidateUploadService) {}
@@ -76,11 +78,54 @@ export class CreateQuestionComponent implements OnInit {
     }
       
   }
+
+  addEQuestion(){
+    if (this.testId!=null && this.question!=null && this.mark!=null) {
+      this.submit="Submitting...";
+        this.questionServie.addEQuestion({
+        test_id: this.testId,
+        question: this.question,
+        user_id: this.user_id,
+        mark_allocated: this.mark
+       }).subscribe(result => {
+          if(result.message=="Success"){
+            this.success=true;
+            this.submit="Submit";
+            this.question="";
+          }
+       });
+    }else{
+      this.notEmpty=true;
+    }
+      
+  }
+
+  addCSQuestion(){
+    if (this.testId!=null && this.question!=null && this.mark!=null) {
+      this.submit="Submitting...";
+        this.questionServie.addCSQuestion({
+        test_id: this.testId,
+        question: this.question,
+        user_id: this.user_id,
+        mark_allocated: this.mark
+       }).subscribe(result => {
+          if(result.message=="Success"){
+            this.success=true;
+            this.submit="Submit";
+            this.question="";
+          }
+       });
+    }else{
+      this.notEmpty=true;
+    }
+      
+  }
   getAllExams(){
     this.examsService.getAllExams().subscribe(result =>{
       this.test = result;
     })
   }
+
   clear(){
     this.notEmpty=false;
     this.exist=false;
@@ -92,37 +137,111 @@ export class CreateQuestionComponent implements OnInit {
   onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);
   }
-  sendFile(file: any) {
+
+  sendMCFile(file: any) {
     this.upload = "Uploading file...";
     let formData:FormData = new FormData();
     formData.set('file', file);
     formData.set('test_id', this.uploadTestID.toString());
-    this.uploadService
+    this.questionServie
       .sendQuestionsFormData(formData)
       .subscribe((event) => {
         if (event!=null) {
           if (event.status_code==200) {
           this.upload = "Upload";
           this.uploadMessage = event.message;
+          setTimeout(() => ( this.uploadMessage = '' ), 5000);
         }else{
           this.upload = "Error";
           this.uploadMessage = event.message;
+          setTimeout(() => ( this.uploadMessage = ''  ), 5000);
           }
         }
       });
   }
   
-  private sendFiles() {
+  private sendMCFiles() {
     this.files.forEach((file) => {
-      this.sendFile(file);
+      this.sendMCFile(file);
     });
   }
-  onClick() {
+  onMCClick() {
     if((this.uploadTestID !== undefined) && this.uploadTestID > 0){
-      this.sendFiles();
+      this.sendMCFiles();
       this.files = [];
     }
   }
+
+  sendEFile(file: any) {
+    this.upload = "Uploading file...";
+    let formData:FormData = new FormData();
+    formData.set('file', file);
+    formData.set('test_id', this.uploadTestID.toString());
+    this.questionServie
+      .sendEFormData(formData)
+      .subscribe((event) => {
+        if (event!=null) {
+          if (event.status_code==200) {
+          this.upload = "Upload";
+          this.uploadMessage = event.message;
+          setTimeout(() => ( this.uploadMessage = '' ), 5000);
+        }else{
+          this.upload = "Error";
+          this.uploadMessage = event.message;
+          setTimeout(() => ( this.uploadMessage = ''  ), 5000);
+          }
+        }
+      });
+  }
+  
+  private sendEFiles() {
+    this.files.forEach((file) => {
+      this.sendEFile(file);
+    });
+  }
+
+  onEClick() {
+    if((this.uploadTestID !== undefined) && this.uploadTestID > 0){
+      this.sendEFiles();
+      this.files = [];
+    }
+  }
+
+  sendCSFile(file: any) {
+    this.upload = "Uploading file...";
+    let formData:FormData = new FormData();
+    formData.set('file', file);
+    formData.set('test_id', this.uploadTestID.toString());
+    this.questionServie
+      .sendCSFormData(formData)
+      .subscribe((event) => {
+        if (event!=null) {
+          if (event.status_code==200) {
+          this.upload = "Upload";
+          this.uploadMessage = event.message;
+          setTimeout(() => ( this.uploadMessage = ''  ), 5000);
+        }else{
+          this.upload = "Error";
+          this.uploadMessage = event.message;
+          setTimeout(() => ( this.uploadMessage = ''  ), 5000);
+          }
+        }
+      });
+  }
+  
+  private sendCSFiles() {
+    this.files.forEach((file) => {
+      this.sendCSFile(file);
+    });
+  }
+
+  onCSClick() {
+    if((this.uploadTestID !== undefined) && this.uploadTestID > 0){
+      this.sendCSFiles();
+      this.files = [];
+    }
+  }
+
   changeUpload(){
     if (this.uploadQuestion){
       this.uploadQuestion=false;

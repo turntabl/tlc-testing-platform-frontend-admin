@@ -20,11 +20,8 @@ export class CandidateUploadService extends BackendService {
     return this.httpClient.post<any>(`${this.baseURL}/api/upload`, formData);
 }
 
-public sendQuestionsFormData(formData: FormData):Observable<any> {
-  return this.httpClient.post<any>(`${this.baseURL}/api/questions/upload`, formData);
-}
-
 public getAllStudents():Observable<Student[]>{
   return this.httpClient.get<any>(`${this.baseURL}/api/students`);
 }
+
 }

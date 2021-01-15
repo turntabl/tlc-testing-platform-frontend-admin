@@ -19,6 +19,7 @@ export class QuestionsPageComponent implements OnInit {
   message:string;
   isSuccess:boolean;
   isError:boolean;
+  question_type:string='';
 
   constructor(
     private viewQuestionService: ViewQuestionService,
@@ -36,7 +37,8 @@ export class QuestionsPageComponent implements OnInit {
     });
   }
 
-  getQuestion(test_id: number, test_title:string) {
+  getQuestion(test_id: number, test_title:string, questions_type:string) {
+    this.question_type = questions_type;
       this.viewQuestionService
         .getQuestionByTestId(test_id)
         .subscribe((response) => {
