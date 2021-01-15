@@ -81,11 +81,11 @@ export class AddExamComponent implements OnInit {
             this.allTests.splice(index,1);
           }
         }
-        this.message = "Successfully deleted course";
+        this.message = "Successfully deleted test";
         this.isSuccess = true;
         setTimeout(() => ( this.isSuccess = false ), 5000);
       }else{
-        this.message = "Error deleting Course";
+        this.message = "Error deleting test";
         this.isError = true;
         setTimeout(() => ( this.isError = false ), 5000);
       }
