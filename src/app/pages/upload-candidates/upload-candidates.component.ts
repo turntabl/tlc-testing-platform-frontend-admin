@@ -24,9 +24,9 @@ export class UploadCandidatesComponent implements OnInit, AfterViewInit {
   @Input() userAdded: any;
   users:any;
   allUsers:any;
-  public dataSource = new MatTableDataSource<Student>();
+  public dataSource = new MatTableDataSource<any>();
   columnsToDisplay = ['first_name', 'last_name', 'email', 'role'];
-  students:any;
+  students:any = [];
   total_candidates: number = 0;
   total_users:number = 0;
   files: any[] = [];
@@ -73,9 +73,8 @@ export class UploadCandidatesComponent implements OnInit, AfterViewInit {
         if (typeof event === 'object') {
           if (event.status_code === 200) {
             this.total_candidates += event.t.atomicInteger;
-            this.students = this.students.concat(
-              event.t.studentList
-            );
+            let combOfAllUsers = event.t.studentList.concat(this.users);
+            this.dataSource.data = combOfAllUsers;
             this.successMessage = event.message;
             this.successIsShown = true;
             setTimeout(() => (this.successIsShown = false), 10000);
