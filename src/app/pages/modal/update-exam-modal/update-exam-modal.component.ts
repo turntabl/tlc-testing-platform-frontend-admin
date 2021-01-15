@@ -58,7 +58,7 @@ export class UpdateExamModalComponent implements OnInit {
     this.examsService.updateExam(this.examUpdateForm.value).subscribe(result => {
       this.response = result;
       if(result.message === "success"){
-        this.onExamUpdate.emit({test_title: this.examUpdateForm.get('test_title')?.value, test_id:this.examUpdateForm.get('test_id')?.value});
+        this.onExamUpdate.emit(this.examUpdateForm.value);
         this.update="Update";
         setTimeout(() => (this.activeModal.dismiss('Cross click')), 1500);
       }else{
@@ -80,7 +80,6 @@ get test_end(){
   return JSON.parse(this.data.test_time_end);
 }
 
-// this.onCourseUpdate.emit(this.courseUpdateForm.value);
 
 onClick(){
   this.notEmpty =false;
