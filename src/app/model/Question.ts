@@ -1,4 +1,5 @@
 export class Question{
+    questionId:number;
     testId: number;
     question: string;
     option: string[] = [];

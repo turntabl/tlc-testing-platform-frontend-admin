@@ -1,18 +1,100 @@
-
 @media screen and (max-width: 800px) {
-    .main-content-wrapper{
-      max-width: 100%;
-    }
+  .main-content-wrapper{
+    max-width: 100%;
   }
+}
 
 .main-content-wrapper{
-    margin-left: 220px; 
-  }
+  margin-left: 220px; 
+}
 
-  .wrapper{
-    max-width:100%;
-    margin-left: 50px;
-    margin-top: 80px;
-    margin-right: 50px;
-  }
+.wrapper{
+  max-width:100%;
+  margin-left: 50px;
+  margin-top: 80px;
+  margin-right: 50px;
+  padding-top: 2em;
 
+}
+
+.main .header {
+  color: #a2a2a2;
+}
+.main .header p {
+  position: relative;
+  top: 5px;
+  font-size: 20px;
+}
+.std-info .info {
+  position: relative;
+  background: linear-gradient( 190deg,  rgb(37, 90, 214), rgb(29, 75, 184), rgb(35, 71, 155) );
+  border-radius: 5px;
+  height: 100px;
+  max-width: 300px;
+  margin: 15px auto;
+  line-height: 100px;
+}
+.std-info #sec {
+  background: linear-gradient( 190deg,  #0d9ec2, #1498b9, #0d677e);
+}
+.std-info #thir {
+  background: linear-gradient( 190deg, #12bb47, #12973c, #127030);
+}
+.main .admin-tsk {
+  position: relative;
+  color: #a2a2a2;
+}
+
+.main .admin-tsk p {
+  position: relative;
+  top: 8px;
+  font-weight: 17px;
+}
+.std-info .info .txt-info {
+  font-size: 12pt;
+  color: white;
+  padding-right: 0.5em;
+}
+
+.std-info .info .txt-num {
+  font-size: 20pt;
+  color: white;
+  padding-left: 0.5em;
+}
+
+.icon_div_inner {
+  text-align: center;
+  display: block;
+  background-color: white;
+  padding-bottom: 15px;
+  border-radius: 5px;
+}
+
+.icon_div_inner:hover{
+  border: 1px solid rgb(4, 168, 168);
+  background:  rgb(241, 255, 255);
+}
+.admin-tsk .icon_div img {
+  height: 100px;
+  padding: 10px;
+  margin-top: 15px;
+}
+
+.icon_div_inner img{
+  margin-bottom: 10px;
+}
+
+.admin-tsk .icon_div p {
+  font-size: 14px;
+  color: #000;
+  text-align: center;
+  margin-top: 5px;
+}
+@media screen and (max-width: 400px) {
+  .admin-tsk .icon_div {
+    margin: 0;
+  }
+  .admin-tsk {
+    padding: 0;
+  }
+}

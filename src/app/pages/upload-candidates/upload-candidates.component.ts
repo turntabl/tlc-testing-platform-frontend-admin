@@ -24,9 +24,9 @@ export class UploadCandidatesComponent implements OnInit, AfterViewInit {
   @Input() userAdded: any;
   users:any;
   allUsers:any;
-  public dataSource = new MatTableDataSource<Student>();
+  public dataSource = new MatTableDataSource<any>();
   columnsToDisplay = ['first_name', 'last_name', 'email', 'role'];
-  students:any;
+  students:any = [];
   total_candidates: number = 0;
   total_users:number = 0;
   files: any[] = [];
@@ -59,11 +59,9 @@ export class UploadCandidatesComponent implements OnInit, AfterViewInit {
   }
 
   onSelect(event: { addedFiles: any }) {
-    console.log(event);
     this.files.push(...event.addedFiles);
   }
   onRemove(event: any) {
-    console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
   sendFile(file: any) {
@@ -73,15 +71,10 @@ export class UploadCandidatesComponent implements OnInit, AfterViewInit {
       .sendFormData(formData)
       .subscribe((event: UploadResponse) => {
         if (typeof event === 'object') {
-          console.log(event.message);
           if (event.status_code === 200) {
-            console.log(event);
-            console.log(event.addStudentSaveResponse.atomicInteger);
-            console.log(event.addStudentSaveResponse.studentList.length);
-            this.total_candidates += event.addStudentSaveResponse.atomicInteger;
-            this.students = this.students.concat(
-              event.addStudentSaveResponse.studentList
-            );
+            this.total_candidates += event.t.atomicInteger;
+            let combOfAllUsers = event.t.studentList.concat(this.users);
+            this.dataSource.data = combOfAllUsers;
             this.successMessage = event.message;
             this.successIsShown = true;
             setTimeout(() => (this.successIsShown = false), 10000);

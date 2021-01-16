@@ -17,15 +17,15 @@ export class CourseService extends BackendService {
     super();
   }
 
-  addCourse(course: Course){
-    return this.http.post(`${this.baseURL}/api/course/add`,course);
+  addCourse(course: Course):Observable<any>{
+    return this.http.post<any>(`${this.baseURL}/api/course/add`,course);
   }
 
   getAllCourse():Observable<CourseUpdate[]>{
     return this.http.get<any>(`${this.baseURL}/api/courses/get`);
   }
 
-  updateCourse(courseUpdate: CourseUpdate){
+  updateCourse(courseUpdate: CourseUpdate):Observable<any>{
     return this.http.post(`${this.baseURL}/api/course/update`,courseUpdate);
   }
 

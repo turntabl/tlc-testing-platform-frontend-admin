@@ -8,7 +8,7 @@ import { ExamsService } from 'src/app/services/exams.service';
   styleUrls: ['./test.component.css'],
 })
 export class TestComponent implements OnInit {
-  exams: Exams[] = [];
+  exams: any;
   empty: number;
 
   constructor(private examsService: ExamsService, private router: Router) {}

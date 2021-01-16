@@ -9,7 +9,7 @@ import { CandidateUploadService } from './candidate-upload.service';
   providedIn: 'root'
 })
 export class UserService extends BackendService  {
-  total_users:number;
+  total_users:number = 0;
 
   constructor(private http: HttpClient, private candidateUploadService:CandidateUploadService ) { 
     super();

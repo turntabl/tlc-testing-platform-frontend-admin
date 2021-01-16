@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Exams } from "../model/Exams";
 import { ExamsUpdate } from "../model/ExamsUpdate";
 import { BackendService } from "./BackendService";
+=======
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ExamRequest } from '../model/ExamRequest';
+import { Exams } from '../model/Exams';
+import { ExamsUpdate } from '../model/ExamsUpdate';
+import { BackendService } from './BackendService';
+>>>>>>> master
 
 @Injectable({
   providedIn: "root",
@@ -23,12 +33,24 @@ export class ExamsService extends BackendService {
     super();
   }
 
+<<<<<<< HEAD
   addExams(exams: Exams) {
     return this.http.post(`${this.baseURL}/api/test/add`, exams);
+=======
+  addExams(exams: ExamRequest):Observable<Exams> {
+    return this.http.post<any>(
+      `${this.baseURL}/api/test/add`,
+      exams
+    );
+>>>>>>> master
   }
 
-  getAllExams(): Observable<Exams[]> {
+  getAllExams(): Observable<any> {
     return this.http.get<any>(`${this.baseURL}/api/test/all`);
+  }
+
+  deleteExam(test_id:number){
+    return this.http.get<any>(`${this.baseURL}/api/test/delete/${test_id}`);
   }
 
   setUpdateExam(examsUpdate: ExamsUpdate) {

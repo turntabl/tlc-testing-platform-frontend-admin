@@ -36,6 +36,7 @@ export class AppComponent {
   userRole:number;
   isLoggedIn$: Observable<boolean>;
   isSuperAdmin$:Observable<boolean>;
+  isSuperAdmin:boolean=false;
   roll: number;
 
   constructor(public auth: AuthenticateService, public modalService: NgbModal, private authService:AuthService, private candidateUploadService:CandidateUploadService, private userService:UserService){}
@@ -43,6 +44,11 @@ export class AppComponent {
   ngOnInit(): void {
     this.isLoggedIn$ = this.authService.isLoggedIn;
     this.isSuperAdmin$ = this.authService.isSuperAdmin;
+    this.isSuperAdmin$.subscribe(res => {
+      if(res){
+        this.isSuperAdmin = true;
+      }
+    });
     this.countCandidates();
   }
   
@@ -85,7 +91,7 @@ export class AppComponent {
     this.candidateUploadService.getAllStudents().subscribe(result=> {
       if (result!=null) {
         this.userService.getAllUsers().subscribe((users)=>{
-          this.userService.total_users = result.length + users.length;
+          this.userService.total_users += result.length + users.length;
       });
       }
     })

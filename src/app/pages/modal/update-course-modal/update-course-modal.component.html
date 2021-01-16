@@ -19,7 +19,7 @@
   <form [formGroup]="courseUpdateForm" >
       <div class="form-group">
         <div class="input-group">
-          <input id="addCourse" class="form-control" formControlName="courseName" name="courseName" placeholder="{{data.courseName}}" (input)="clear()">
+          <input id="addCourse" class="form-control" formControlName="courseName" name="courseName" [value]="data.courseName" (input)="clear()">
         </div>
       </div>
     </form>

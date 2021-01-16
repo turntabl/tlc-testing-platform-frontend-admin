@@ -51,8 +51,8 @@ export class AdminDashboardComponent implements OnInit {
 
   openCourseModal() {
     const modalRef = this.modalService.open(AddCourseModalComponent);
-    modalRef.componentInstance.onCourseAdd.subscribe((data: boolean)=> {
-        if(data){
+    modalRef.componentInstance.onCourseAdd.subscribe((data: {courseName: string, courseId: number})=> {
+        if(data!==null){
           this.numberOfCourses++;
         }
     });
