@@ -38,6 +38,8 @@ export class AppComponent {
   isSuperAdmin$:Observable<boolean>;
   isSuperAdmin:boolean=false;
   roll: number;
+  collect1:any;
+  user_role:number;
 
   constructor(public auth: AuthenticateService, public modalService: NgbModal, private authService:AuthService, private candidateUploadService:CandidateUploadService, private userService:UserService){}
 
@@ -50,6 +52,7 @@ export class AppComponent {
       }
     });
     this.countCandidates();
+    this.checkIfSuperAdmin();
   }
   
   signout(): void {
@@ -95,5 +98,12 @@ export class AppComponent {
       });
       }
     })
+  }
+
+  checkIfSuperAdmin(){
+    this.collect1 = localStorage.getItem("id");
+    if(this.collect1 !== null){
+      this.user_role = JSON.parse(this.collect1).role;
+    }
   }
 }
