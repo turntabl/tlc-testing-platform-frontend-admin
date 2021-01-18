@@ -131,8 +131,13 @@ export class CreateQuestionComponent implements OnInit {
     this.exist=false;
   }
 
-  onSelect(event: { addedFiles: any }) {
-    this.files.push(...event.addedFiles);
+  onSelect(event:any) {
+    if(this.files.length>0){
+      this.files.splice(0,1);
+    }
+    let files = event.target.files;
+    let file = files[0];
+    this.files.push(file);
   }
   onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);
@@ -168,7 +173,6 @@ export class CreateQuestionComponent implements OnInit {
   onMCClick() {
     if((this.uploadTestID !== undefined) && this.uploadTestID > 0){
       this.sendMCFiles();
-      this.files = [];
     }
   }
 

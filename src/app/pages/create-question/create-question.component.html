@@ -26,32 +26,15 @@
                     <ng-container  *ngIf="i.questions_type === 'MC'">
                       <option [value]="i.test_id" >{{i.test_title}}</option>
                     </ng-container>
-                  </ng-container>
+                  </ng-container> 
                 </select>
               </div>
-                    <div
-                      class="custom-dropzone"
-                      ngx-dropzone
-                      (change)="onSelect($event)"
-                    >
-                      <ngx-dropzone-label>
-                        <div class="caption">
-                          <h2>Upload Questions (CSV file format)</h2>
-                        </div>
-                      </ngx-dropzone-label>
-                      <ngx-dropzone-image-preview
-                        ngProjectAs="ngx-dropzone-preview"
-                        *ngFor="let f of files"
-                        [file]="f"
-                        [removable]="true"
-                        (removed)="onRemove(f)"
-                      >
-                        <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
-                      </ngx-dropzone-image-preview>
-                    </div>
-                    <button class="uploadFile" (click)="onMCClick()">
-                      {{ upload }}
-                    </button>
+              <hr>
+              <input type="file" accept=".csv" (change)="onSelect($event)">
+              <hr>
+              <button class="uploadFile" (click)="onMCClick()">
+                {{ upload }}
+              </button>
                   </div>
                 <div class="content-right mb-5" *ngIf="!uploadQuestion"> 
                 <form >
@@ -222,29 +205,12 @@
                   </ng-container>
                 </select>
               </div>
-                    <div
-                      class="custom-dropzone"
-                      ngx-dropzone
-                      (change)="onSelect($event)"
-                    >
-                      <ngx-dropzone-label>
-                        <div class="caption">
-                          <h2>Upload Questions (CSV file format)</h2>
-                        </div>
-                      </ngx-dropzone-label>
-                      <ngx-dropzone-image-preview
-                        ngProjectAs="ngx-dropzone-preview"
-                        *ngFor="let f of files"
-                        [file]="f"
-                        [removable]="true"
-                        (removed)="onRemove(f)"
-                      >
-                        <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
-                      </ngx-dropzone-image-preview>
-                    </div>
-                    <button class="uploadFile" (click)="onEClick()">
-                      {{ upload }}
-                    </button>
+              <hr>
+              <input type="file" accept=".csv" (change)="onSelect($event)">
+              <hr>
+              <button class="uploadFile" (click)="onEClick()">
+                {{ upload }}
+              </button>
                   </div>
                 <div class="content-right mb-5" *ngIf="!uploadQuestion"> 
                 <form >
@@ -319,29 +285,12 @@
                   </ng-container>
                 </select>
               </div>
-                    <div
-                      class="custom-dropzone"
-                      ngx-dropzone
-                      (change)="onSelect($event)"
-                    >
-                      <ngx-dropzone-label>
-                        <div class="caption">
-                          <h2>Upload Questions (CSV file format)</h2>
-                        </div>
-                      </ngx-dropzone-label>
-                      <ngx-dropzone-image-preview
-                        ngProjectAs="ngx-dropzone-preview"
-                        *ngFor="let f of files"
-                        [file]="f"
-                        [removable]="true"
-                        (removed)="onRemove(f)"
-                      >
-                        <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
-                      </ngx-dropzone-image-preview>
-                    </div>
-                    <button class="uploadFile" (click)="onCSClick()">
-                      {{ upload }}
-                    </button>
+              <hr>
+              <input type="file" accept=".csv" (change)="onSelect($event)">
+              <hr>
+              <button class="uploadFile" (click)="onCSClick()">
+                {{ upload }}
+              </button>
                   </div>
                 <div class="content-right mb-5" *ngIf="!uploadQuestion"> 
                 <form >
