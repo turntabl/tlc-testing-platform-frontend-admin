@@ -75,7 +75,7 @@ export class AddCourseComponent implements OnInit {
     },
 
     error => {
-      this.message = "Error : There is/are test(s) and questions associated with this course.";
+      this.message = "Cannot delete record. A Test has been taken under this record.";
       this.isError = true;
       setTimeout(() => ( this.isError = false ), 5000);
     }
