@@ -148,8 +148,8 @@ export class CreateQuestionComponent implements OnInit {
   sendMCFile(file: any) {
     this.upload = "Uploading file...";
     let formData:FormData = new FormData();
-    formData.set('file', file);
-    formData.set('test_id', this.uploadTestID.toString());
+    formData.append('file', file);
+    formData.append('test_id', this.uploadTestID.toString());
     this.questionServie
       .sendQuestionsFormData(formData)
       .subscribe((event) => {
@@ -183,8 +183,8 @@ export class CreateQuestionComponent implements OnInit {
   sendEFile(file: any) {
     this.upload = "Uploading file...";
     let formData:FormData = new FormData();
-    formData.set('file', file);
-    formData.set('test_id', this.uploadTestID.toString());
+    formData.append('file', file);
+    formData.append('test_id', this.uploadTestID.toString());
     this.questionServie
       .sendEFormData(formData)
       .subscribe((event) => {
@@ -220,8 +220,8 @@ export class CreateQuestionComponent implements OnInit {
   sendCSFile(file: any) {
     this.upload = "Uploading file...";
     let formData:FormData = new FormData();
-    formData.set('file', file);
-    formData.set('test_id', this.uploadTestID.toString());
+    formData.append('file', file);
+    formData.append('test_id', this.uploadTestID.toString());
     this.questionServie
       .sendCSFormData(formData)
       .subscribe((event) => {
