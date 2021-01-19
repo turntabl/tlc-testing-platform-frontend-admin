@@ -1,5 +1,5 @@
 import { isNull } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { empty, Subscription } from 'rxjs';
@@ -15,6 +15,8 @@ import { QuestionService } from 'src/app/services/question.service';
   styleUrls: ['./create-question.component.css'],
 })
 export class CreateQuestionComponent implements OnInit {
+  @ViewChild('myInput')
+  myInputVariable: ElementRef;
   uploadTestID:number;
   files: any[] = [];
   active = 1;
@@ -155,10 +157,12 @@ export class CreateQuestionComponent implements OnInit {
           if (event.status_code==200) {
           this.upload = "Upload";
           this.uploadMessage = event.message;
+          this.myInputVariable.nativeElement.value = "";
           setTimeout(() => ( this.uploadMessage = '' ), 5000);
         }else{
           this.upload = "Error";
           this.uploadMessage = event.message;
+          this.myInputVariable.nativeElement.value = "";
           setTimeout(() => ( this.uploadMessage = ''  ), 5000);
           }
         }
@@ -188,10 +192,12 @@ export class CreateQuestionComponent implements OnInit {
           if (event.status_code==200) {
           this.upload = "Upload";
           this.uploadMessage = event.message;
+          this.myInputVariable.nativeElement.value = "";
           setTimeout(() => ( this.uploadMessage = '' ), 5000);
         }else{
           this.upload = "Error";
           this.uploadMessage = event.message;
+          this.myInputVariable.nativeElement.value = "";
           setTimeout(() => ( this.uploadMessage = ''  ), 5000);
           }
         }
@@ -223,10 +229,12 @@ export class CreateQuestionComponent implements OnInit {
           if (event.status_code==200) {
           this.upload = "Upload";
           this.uploadMessage = event.message;
+          this.myInputVariable.nativeElement.value = "";
           setTimeout(() => ( this.uploadMessage = ''  ), 5000);
         }else{
           this.upload = "Error";
           this.uploadMessage = event.message;
+          this.myInputVariable.nativeElement.value = "";
           setTimeout(() => ( this.uploadMessage = ''  ), 5000);
           }
         }

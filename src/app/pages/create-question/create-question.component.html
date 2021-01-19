@@ -30,7 +30,7 @@
                 </select>
               </div>
               <hr>
-              <input type="file" accept=".csv" (change)="onSelect($event)">
+              <input #myInput type="file" accept=".csv" (change)="onSelect($event)">
               <hr>
               <button class="uploadFile" (click)="onMCClick()">
                 {{ upload }}
@@ -206,7 +206,7 @@
                 </select>
               </div>
               <hr>
-              <input type="file" accept=".csv" (change)="onSelect($event)">
+              <input #myInput type="file" accept=".csv" (change)="onSelect($event)">
               <hr>
               <button class="uploadFile" (click)="onEClick()">
                 {{ upload }}
@@ -286,7 +286,7 @@
                 </select>
               </div>
               <hr>
-              <input type="file" accept=".csv" (change)="onSelect($event)">
+              <input #myInput type="file" accept=".csv" (change)="onSelect($event)">
               <hr>
               <button class="uploadFile" (click)="onCSClick()">
                 {{ upload }}
