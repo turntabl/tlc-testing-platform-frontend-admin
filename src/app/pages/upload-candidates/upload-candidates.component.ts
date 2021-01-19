@@ -21,6 +21,8 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./upload-candidates.component.css'],
 })
 export class UploadCandidatesComponent implements OnInit, AfterViewInit {
+  @ViewChild('myInput')
+  myInputVariable: ElementRef;
   @Input() userAdded: any;
   users:any;
   allUsers:any;
@@ -77,10 +79,12 @@ export class UploadCandidatesComponent implements OnInit, AfterViewInit {
             this.dataSource.data = combOfAllUsers;
             this.successMessage = event.message;
             this.successIsShown = true;
+            this.myInputVariable.nativeElement.value = "";
             setTimeout(() => (this.successIsShown = false), 10000);
           } else if (event.status_code === 203) {
             this.errorMessage = event.message;
             this.errorIsShown = true;
+            this.myInputVariable.nativeElement.value = "";
             setTimeout(() => (this.errorIsShown = false), 10000);
           }
         }
