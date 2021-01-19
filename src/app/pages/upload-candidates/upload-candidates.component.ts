@@ -21,6 +21,8 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./upload-candidates.component.css'],
 })
 export class UploadCandidatesComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild('fileUpload', { static: false }) fileUpload!: ElementRef;
   @ViewChild('myInput')
   myInputVariable: ElementRef;
   @Input() userAdded: any;
@@ -38,30 +40,26 @@ export class UploadCandidatesComponent implements OnInit, AfterViewInit {
   errorMessage: string = '';
   uploadUsers: boolean=false;
   uploadChanger: string="Upload Users";
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-  @ViewChild('fileUpload', { static: false }) fileUpload!: ElementRef;
+
 
   constructor(private uploadService: CandidateUploadService, private auth: AuthenticateService, private userService:UserService) {}
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   ngOnInit(): void {
     this.auth.notLogin();
     this.getAllUsers();
-    this.uploadService.getAllStudents().subscribe((data: Student[]) => {
-      if (data) {
-      this.total_candidates = data.length;
-      let combOfAllUsers = data.concat(this.users);
-      this.dataSource.data = combOfAllUsers as any;
-    }
-    });
+
   }
 
-  onSelect(event: { addedFiles: any }) {
-    this.files.push(...event.addedFiles);
+  onSelect(event:any) {
+    if(this.files.length>0){
+      this.files.splice(0,1);
+    }
+    let files = event.target.files;
+    let file = files[0];
+    this.files.push(file);
   }
   onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);
@@ -109,6 +107,17 @@ export class UploadCandidatesComponent implements OnInit, AfterViewInit {
     this.userService.getAllUsers().subscribe((users)=>{
         this.users = users;
         this.total_users += users.length;
+    },
+    (error)=>{
+
+    },
+    ()=>{
+      this.uploadService.getAllStudents().subscribe((data: Student[]) => {
+        if (data) {
+        this.total_candidates = data.length;
+        let combOfAllUsers = data.concat(this.users);
+        this.dataSource.data = combOfAllUsers as any;
+      }})
     });
   }
 
