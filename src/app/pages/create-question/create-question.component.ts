@@ -166,7 +166,14 @@ export class CreateQuestionComponent implements OnInit {
           setTimeout(() => ( this.uploadMessage = ''  ), 5000);
           }
         }
-      });
+      },
+      (error)=>{
+          this.upload = "Upload";
+          this.uploadMessage = error.message;
+          this.myInputVariable.nativeElement.value = "";
+          setTimeout(() => ( this.uploadMessage = '' ), 5000);
+        }
+      );
   }
   
   private sendMCFiles() {
@@ -201,6 +208,12 @@ export class CreateQuestionComponent implements OnInit {
           setTimeout(() => ( this.uploadMessage = ''  ), 5000);
           }
         }
+      },
+      (error)=>{
+        this.upload = "Upload";
+        this.uploadMessage = error.message;
+        this.myInputVariable.nativeElement.value = "";
+        setTimeout(() => ( this.uploadMessage = '' ), 5000);
       });
   }
   
@@ -238,7 +251,14 @@ export class CreateQuestionComponent implements OnInit {
           setTimeout(() => ( this.uploadMessage = ''  ), 5000);
           }
         }
-      });
+      },
+      (error)=>{
+        this.upload = "Upload";
+        this.uploadMessage = error.message;
+        this.myInputVariable.nativeElement.value = "";
+        setTimeout(() => ( this.uploadMessage = '' ), 5000);
+      }
+      );
   }
   
   private sendCSFiles() {
