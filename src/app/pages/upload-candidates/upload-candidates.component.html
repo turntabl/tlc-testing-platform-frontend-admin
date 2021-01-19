@@ -19,30 +19,12 @@
     <span class="up" (click)="changeUpload()">{{ uploadChanger }}</span>
     <div *ngIf="total_users!=0">
     <div class="content-right" *ngIf="uploadUsers">
-      <div
-        class="custom-dropzone"
-        ngx-dropzone
-        [accept]="
-          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv'
-        "
-        (change)="onSelect($event)"
-      >
-        <ngx-dropzone-label>
-          <div class="caption">
-            <h2>Drag and Drop Excel / CSV file. Or Click to Select.</h2>
-          </div>
-        </ngx-dropzone-label>
-        <ngx-dropzone-image-preview
-          ngProjectAs="ngx-dropzone-preview"
-          *ngFor="let f of files"
-          [file]="f"
-          [removable]="true"
-          (removed)="onRemove(f)"
-        >
-          <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
-        </ngx-dropzone-image-preview>
-      </div>
-      <button class="uploadFile" (click)="onClick()">Upload</button>
+      <hr>
+      <input #myInput type="file" accept=".csv" (change)="onSelect($event)">
+      <hr>
+      <button class="uploadFile" (click)="onClick()">
+        Upload
+      </button>
     </div>
     </div>
 
